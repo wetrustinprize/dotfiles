@@ -18,7 +18,7 @@ ln -s $HOME/.dotfiles/mydotfiles/zshrc $HOME/.zshrc
 rm -i -rf "$HOME/.p10k.zsh"
 ln -s $HOME/.dotfiles/mydotfiles/p10k.zsh $HOME/.p10k.zsh
 
-# SNAP and APT Install
+# Packages
 source $HOME/.dotfiles/scripts/snap.sh
 source $HOME/.dotfiles/scripts/apt.sh
 source $HOME/.dotfiles/scripts/nodejs.sh

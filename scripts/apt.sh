@@ -1,9 +1,14 @@
+# Update APT
 sudo apt update
 
-sudo apt install python3
-sudo apt install pip3
+# Pacakges to install
+packages=(
+    python3
+    pip3
+    nodejs
+    npm
+)
 
-sudo apt install nodejs
-sudo apt install npm
-
-sudo apt install latte-dock
+for pacakge in "${packages[@]}"; do
+    sudo apt install "$package"
+done
