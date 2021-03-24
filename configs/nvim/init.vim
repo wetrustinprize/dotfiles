@@ -19,13 +19,39 @@
 		autocmd FileType defx call s:defx_my_settings()
 		function! s:defx_my_settings() abort
 			
-			" Open directory
+			" Open Directory or File
+			nmap <silent><buffer><expr> o
+						\ defx#is_directory() ? defx#do_action('open') : 
+						\ match(bufname('%'), 'explorer') >= 0 ?
+						\ (defx#do_action('multi', [['drop', 'vsplit'], ['quit']])) :
+						\ (defx#do_action('multi', ['open', 'quit']))
+			" Open Tree
 			nmap <silent><buffer><expr> l
-						\ defx#is_directory() ? defx#do_action('open') : 0
+						\ defx#do_action('open_or_close_tree') 
 
 			" Return folder
 			nmap <silent><buffer><expr> h
 						\ defx#do_action('cd', ['..'])
+
+			" New Directory
+			nmap <silent><buffer><expr> K
+						\ defx#do_action('new_directory')
+
+			" New File
+			nmap <silent><buffer><expr> N
+						\ defx#do_action('new_file')
+
+			" Remove
+			nmap <silent><buffer><expr> d
+						\ defx#do_action('remove')
+
+			" Rename
+			nmap <silent><buffer><expr> r
+						\ defx#do_action('rename')
+
+			" Quit
+			nmap <silent><buffer><expr> q
+						\ defx#do_action('quit')
 		endfunction
 
 
