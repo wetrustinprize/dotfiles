@@ -37,6 +37,7 @@ alias gcm='git commit -m'
 alias gp='git pull'
 alias gps='git push'
 alias sudo='nocorrect sudo -E '
+alias updateall='sudo apt update -y & sudo apt upgrade -y'
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"

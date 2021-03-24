@@ -2,20 +2,32 @@
 	call functions#PlugLoad()
 	call plug#begin('~/.config/nvim/plugged')
 
-" Apparence
-	set number
-	set wrap
-	set shell=$SHELL
-
-	set smarttab
-	set tabstop=4
-	set softtabstop=4
-	set shiftwidth=4
-	set shiftround
 
 " Plugins
-	" File Manager
+	Plug 'ryanoasis/vim-devicons'
+
+	" Defx (file manager)
 	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'kristijanhusak/defx-icons'
+	Plug 'kristijanhusak/defx-git'
+
+	" Key Mappgins
+		" Open Explorer
+		nmap <silent><Leader>e :
+					\<C-U>:Defx -resume -buffer_name=explorer -split=vertical -vertical_preview<CR>
+		
+		autocmd FileType defx call s:defx_my_settings()
+		function! s:defx_my_settings() abort
+			
+			" Open directory
+			nmap <silent><buffer><expr> l
+						\ defx#is_directory() ? defx#do_action('open') : 0
+
+			" Return folder
+			nmap <silent><buffer><expr> h
+						\ defx#do_action('cd', ['..'])
+		endfunction
+
 
 	" COC (autocomplete)
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -29,8 +41,8 @@
 				\ 'coc-git'
 				\ ]
 	
-		" key mappings
-		" coc-prettier
+		" Key Mappings
+		" Coc-Prettier
 		command! -nargs=0 Prettier :CocCommand prettier.formatFile
 		nmap <leader>f :CocCommand prettier.formatFile<cr>
 
@@ -60,12 +72,38 @@
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-" Theme
+	" Language-Specific
+		" TypeScript
+		Plug 'leafgarland/typescript-vim', { 'for': 'tsx' }
+
+		" Json
+		Plug 'elzr/vim-json', { 'for': 'json' } 
+
+	" Theme
 	Plug 'joshdick/onedark.vim'
 
 	call plug#end()
 
-" Colorscheme
-syntax enable
-let g:onedark_terminal_italics=1
-colorscheme onedark
+" Apparence
+	syntax enable
+	let g:onedark_terminal_italics=1
+	colorscheme onedark
+
+	set number
+	set wrap
+	set shell=$SHELL
+	set encoding=UTF-8
+
+	set smarttab
+	set tabstop=4
+	set softtabstop=4
+	set shiftwidth=4
+	set shiftround
+
+	" Defx Apparence
+	call defx#custom#option('_', {
+		\ 'ignored_files': '.*,target*',
+		\ 'direction': 'topleft',
+		\ 'toggle': 1,
+		\ 'columns': 'indent:git:icons:filename:mark',
+	\ })
