@@ -37,13 +37,10 @@ alias gcm='git commit -m'
 alias gp='git pull'
 alias gps='git push'
 alias sudo='nocorrect sudo -E '
-alias updateall='sudo apt update -y & sudo apt upgrade -y'
+alias updateall='sudo apt update -y && sudo apt upgrade -y'
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Vim Mode
-bindkey -v
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

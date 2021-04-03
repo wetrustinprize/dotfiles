@@ -2,6 +2,7 @@
 
 DOTFILESDIR="$(pwd)/dotfiles/"
 CFGFILESDIR="$(pwd)/configs/"
+XMONADFILES="$(pwd)/xmonad/"
 
 # Ask for the administrator password upfront
 sudo -v
@@ -38,6 +39,9 @@ make_links() {
 		rm -i -rf "$target"
 		ln -s "$file" "$target"
 	done
+
+	# xmonad
+	ln -s "$XMONADFILES/xmonad.hs" "$HOME/.xmonad/xmonad.hs"
 }
 
 make_links
