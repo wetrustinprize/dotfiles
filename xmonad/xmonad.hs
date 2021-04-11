@@ -36,9 +36,6 @@ myBrowser = "firefox" -- Sets default browser
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
-myClickJustFocuses :: Bool
-myClickJustFocuses = False -- Whether clicking on a window to focus also passes the click to the window
-
 myBorderWidth :: Dimension
 myBorderWidth = 1 -- Width of the window border in pixels.
 
@@ -50,8 +47,8 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myWorkspaces    = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"]
 
-myBorderColor  = "#dddddd" -- Normal border color
-myFocusColor = "#ff0000" -- Focused border color
+myBorderColor  = "#322C58" -- Normal border color
+myFocusColor = "#74B99A" -- Focused border color
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -204,7 +201,6 @@ main = do
 	xmonad $ ewmh def { 
 		terminal           = myTerminal,
 		focusFollowsMouse  = myFocusFollowsMouse,
-		clickJustFocuses   = myClickJustFocuses,
 		borderWidth        = myBorderWidth,
 		modMask            = myModMask,
 		workspaces         = myWorkspaces,
@@ -221,14 +217,13 @@ main = do
 		startupHook        = myStartupHook,
 		logHook            = dynamicLogWithPP xmobarPP
 			{ ppOutput = \x -> hPutStrLn xmproc x
-			, ppCurrent = xmobarColor "#C8AED1" "" . wrap "[" "]"
-			, ppVisible = xmobarColor "#9987AD" ""
-			, ppHidden = xmobarColor "#74B99A" "" . wrap "*" ""
-			, ppHiddenNoWindows = xmobarColor "#C792EA" ""
-			, ppTitle = xmobarColor "#B3AFC2" "" . shorten 60
+			, ppCurrent = xmobarColor "#74B99A" "" . wrap "\xe0b3" "\xe0b1"
+			, ppVisible = xmobarColor "#74B99A" ""
+			, ppHidden = xmobarColor "#C792EA" "" . wrap "\xf070 " ""
+			, ppHiddenNoWindows = xmobarColor "#B6B7D5" ""
 			, ppSep = " | "
 			, ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
 			, ppExtras = [windowCount]
-			, ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+			, ppOrder = \(ws:l:t:ex) -> [ws,l]++ex
 		}
 	} `additionalKeysP` myKeys
