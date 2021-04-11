@@ -88,6 +88,10 @@ myKeys =
 	-- Layouts
 		, ("M-<Space>", sendMessage NextLayout) -- Rotate through the available layout algorithms
 
+	-- Print
+		, ("<Print>", spawn "scrot -e 'xclip -selection clipboard -t image/png $f' -s") -- Selection screenshot
+		, ("S-<Print>", spawn "scrot -e 'xclip -selection clipboard -t image/png $f'") -- Fullscreen screenshot
+
 	-- Multimedia Keys
 		, ("<XF86AudioMute>", spawn "amixer -D pulse sset Master toggle")
 		, ("<XF86AudioLowerVolume>", spawn "amixer -D pulse sset Master 5%- unmute")
