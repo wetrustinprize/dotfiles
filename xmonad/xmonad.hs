@@ -6,9 +6,14 @@ import XMonad
 import Data.Monoid
 import System.Exit
 
+-- ACTIONS
+import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
+import XMonad.Actions.WithAll (killAll, sinkAll)
+
 -- UTILS
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+import XMonad.Util.EZConfig (additionalKeysP)
 
 -- LAYOUT
 import XMonad.Layout.Spacing
@@ -25,6 +30,9 @@ import qualified Data.Map        as M
 myTerminal :: String
 myTerminal = "konsole" -- Sets default terminal
 
+myBrowser :: String
+myBrowser = "firefox" -- Sets default browser
+
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
@@ -40,7 +48,7 @@ myModMask = mod4Mask -- Sets modkey to super key
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
-myWorkspaces    = ["0","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"]
 
 myBorderColor  = "#dddddd" -- Normal border color
 myFocusColor = "#ff0000" -- Focused border color
@@ -48,97 +56,47 @@ myFocusColor = "#ff0000" -- Focused border color
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
+myKeys :: [(String, X ())]
+myKeys =
+    [ 
+	-- Xmonad
+		  ("M-S-q", io (exitWith ExitSuccess)) -- Quit xmonad
+		, ("M-q", spawn "xmonad --recompile; xmonad --restart") -- Restart xmonad
+	
+	-- Workspaces
+		, ("M-.", nextScreen) -- Switch focus to next monitor
+		, ("M-,", prevScreen) -- Switch focus to prev monitor
+	
+	-- Run Prompt
+		, ("M-p", spawn "dmenu_run") -- Run demenu
 
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+	-- Windows
+		, ("M-S-c", kill) -- Kill focused window
+		, ("M-S-a", killAll) -- Kill all windows on currento WS
+		, ("M-j", windows W.focusDown) -- Focus next window
+		, ("M-k", windows W.focusUp  ) -- Focus prev window
+		, ("M-m", windows W.focusMaster  ) -- Focus master
+		, ("M-S-m", windows W.swapMaster) -- Swap the focused window and the master window
+		, ("M-h", sendMessage Shrink) -- Shrink the master area
+		, ("M-l", sendMessage Expand) -- Expand the master area
+		, ("M-t", withFocused $ windows . W.sink) -- Push window back into tiling
+		, ("M-S-t", sinkAll) -- Push all windows back into tiling
+		, ("M-S-<Up>", sendMessage (IncMasterN 1)) -- Increment the number of windows in the master area
+		, ("M-S-<Down>", sendMessage (IncMasterN (-1))) -- Deincrement the number of windows in the master area
 
-    -- launch dmenu
-    , ((modm,               xK_p	 ), spawn "dmenu_run")
+	-- Appliactions
+		, ("M-<Return>", spawn $ myTerminal) -- Creates a new Terminal
+		, ("M-b", spawn $ myBrowser)
 
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+	-- Layouts
+		, ("M-<Space>", sendMessage NextLayout) -- Rotate through the available layout algorithms
 
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
-
-     -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), sendMessage NextLayout)
-
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
-    -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
-
-    -- Move focus to the next window
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-
-    -- Move focus to the next window
-    , ((modm,               xK_j     ), windows W.focusDown)
-
-    -- Move focus to the previous window
-    , ((modm,               xK_k     ), windows W.focusUp  )
-
-    -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-
-    -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
-
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-
-    -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-
-    -- Shrink the master area
-    , ((modm,               xK_h     ), sendMessage Shrink)
-
-    -- Expand the master area
-    , ((modm,               xK_l     ), sendMessage Expand)
-
-    -- Push window back into tiling
-    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
-
-    -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-
-    -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
-    --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
-
-    -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-
-    -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+	-- Multimedia Keys
+		, ("<XF86AudioMute>", spawn "amixer -D pulse sset Master toggle")
+		, ("<XF86AudioLowerVolume>", spawn "amixer -D pulse sset Master 5%- unmute")
+		, ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse sset Master 5%+ unmute")
 
     ]
-    ++
-
-    --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -191,10 +149,23 @@ myLayoutHook = avoidStruts (tiled ||| Full)
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ resource  =? "bitwarden"      --> doFloat
+    [ resource  =? "bitwarden" --> doFloat
+	, resource  =? "gpick" --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore 
-	, title     =? "Friends List"   --> doFloat ]
+    , resource  =? "kdesktop" --> doIgnore 
+	, title     =? "Friends List" --> doFloat
+
+	-- Will always spawn on Workspace www
+	, title =? "Mozilla Firefox" --> doShift (myWorkspaces !! 0)
+
+	-- Will aways spawn on Workspace soc
+	, resource	=? "telegram-desktop" --> doShift (myWorkspaces !! 3)
+	, resource	=? "kesty-whatsapp" --> doShift (myWorkspaces !! 3)
+	, resource	=? "discord" --> doShift (myWorkspaces !! 3)
+
+	-- Will always spawn on Workspace gfx
+	, resource =? "krita" --> doShift (myWorkspaces !! 7)
+	]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -217,8 +188,12 @@ myEventHook = mempty
 -- By default, do nothing.
 myStartupHook = do
 	spawnOnce "nitrogen --restore &"
-	spawnOnce "compton &"
+	spawnOnce "picom --xrender-sync-fence --backend glx --experimental-backend --config ~/.config/picom.conf &"
 	spawnOnce "dunst &"
+
+	-- Social apps
+	spawnOnce "telegram-desktop"
+	spawnOnce "discord"
 
 main :: IO ()
 main = do
@@ -237,7 +212,6 @@ main = do
 		focusedBorderColor = myFocusColor,
 
 		-- key bindings
-		keys               = myKeys,
 		mouseBindings      = myMouseBindings,
 
 		-- hooks, layouts
@@ -247,9 +221,9 @@ main = do
 		startupHook        = myStartupHook,
 		logHook            = dynamicLogWithPP xmobarPP
 			{ ppOutput = \x -> hPutStrLn xmproc x
-			, ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]"
-			, ppVisible = xmobarColor "#98be65" ""
-			, ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""
+			, ppCurrent = xmobarColor "#C8AED1" "" . wrap "[" "]"
+			, ppVisible = xmobarColor "#9987AD" ""
+			, ppHidden = xmobarColor "#74B99A" "" . wrap "*" ""
 			, ppHiddenNoWindows = xmobarColor "#C792EA" ""
 			, ppTitle = xmobarColor "#B3AFC2" "" . shorten 60
 			, ppSep = " | "
@@ -257,4 +231,4 @@ main = do
 			, ppExtras = [windowCount]
 			, ppOrder = \(ws:l:t:ex) -> [ws,l]++ex++[t]
 		}
-	}
+	} `additionalKeysP` myKeys

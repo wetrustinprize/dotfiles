@@ -1,17 +1,9 @@
 Config { font = "xft:JetBrainsMono Nerd Font:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = []
        , borderColor = "black"
-       , border = TopB
-       , bgColor = "black"
+       , bgColor = "#322c58"
        , fgColor = "grey"
-       , alpha = 255
-       , position = Top
-       , textOffset = -1
-       , iconOffset = -1
-       , lowerOnStart = True
-       , pickBroadest = False
-       , persistent = False
-       , hideOnStart = False
+       , position = Static { xpos = 5, ypos = 3, width = 1910, height = 23 }
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
@@ -27,5 +19,5 @@ Config { font = "xft:JetBrainsMono Nerd Font:pixelsize=12:antialias=true:hinting
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader%}%date%{%cpu% | %memory%"
+       , template = " %StdinReader%}%date%{%cpu% | %memory% "
        }
