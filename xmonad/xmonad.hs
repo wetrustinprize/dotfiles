@@ -17,6 +17,8 @@ import XMonad.Util.EZConfig (additionalKeysP)
 
 -- LAYOUT
 import XMonad.Layout.Spacing
+import XMonad.Layout.Renamed
+import XMonad.Layout.NoBorders
 
 -- HOOKS
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
@@ -129,10 +131,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayoutHook = avoidStruts (tiled ||| Full)
-  where
+tiled   =   avoidStruts
+			$ spacing 3
+			$ Tall 1 (3/100) (1/2)
+
+monocle =   noBorders
+			$ spacing 0
+			$ Full
+
+myLayoutHook = tiled ||| monocle
      -- default tiling algorithm partitions the screen into two panes
-     tiled   = spacing 3 $ Tall 1 (3/100) (1/2)
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -153,8 +161,11 @@ myManageHook = composeAll
     [ resource  =? "bitwarden" --> doFloat
 	, resource  =? "gpick" --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop" --> doIgnore 
+    , resource  =? "kdesktop" --> doIgnore
+
+	-- Steam stuff
 	, title     =? "Friends List" --> doFloat
+	, title		=? "Steam - News" --> doFloat
 
 	-- Will always spawn on Workspace www
 	, title =? "Mozilla Firefox" --> doShift (myWorkspaces !! 0)
@@ -163,6 +174,7 @@ myManageHook = composeAll
 	, resource	=? "telegram-desktop" --> doShift (myWorkspaces !! 3)
 	, resource	=? "kesty-whatsapp" --> doShift (myWorkspaces !! 3)
 	, resource	=? "discord" --> doShift (myWorkspaces !! 3)
+	, resource  =? "steam" --> doShift (myWorkspaces !! 3)
 
 	-- Will always spawn on Workspace gfx
 	, resource =? "krita" --> doShift (myWorkspaces !! 7)
