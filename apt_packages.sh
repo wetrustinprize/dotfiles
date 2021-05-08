@@ -3,4 +3,4 @@
 sudo -v
 
 # xmonad stuff
-sudo apt install xmonad libghc-xmonad-contrib-dev xterm dmenu xmobar nitrogen dunst
+sudo apt install xmonad libghc-xmonad-contrib-dev xterm dmenu xmobar nitrogen dunst xdotool

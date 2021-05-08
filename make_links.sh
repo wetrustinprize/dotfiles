@@ -4,12 +4,27 @@ sudo -v
 
 DOTFILESDIR="$(pwd)/dotfiles/"
 CFGFILESDIR="$(pwd)/configs/"
-XMONADFILES="$(pwd)/xmonad/"
+XMONADFILESDIR="$(pwd)/xmonad/"
+LOCALBINFILESDIR="$(pwd)/bin"
 
 # dotfiles
 DOTFILES=$(find -H "$DOTFILESDIR" -maxdepth 3 -name '*.dotfile')
 for file in $DOTFILES; do
     target="$HOME/.$(basename "$file" '.dotfile')"
+    echo "Creating symlink for $file ($target)"
+    rm -i -rf "$target"
+    ln -s "$file" "$target"
+done
+
+# local bin files
+if [ ! -d "$HOME/.local/bin" ]; then
+    echo "Creating ~/local/bin"
+    mkdir -p "$HOME/.local/bin"
+fi
+
+LOCALBINFILES=$(find -H "$LOCALBINFILESDIR" -maxdepth 999 2>/dev/null)
+for file in $LOCALBINFILES; do
+    target="$HOME/.local/bin/$(basename "$file")"
     echo "Creating symlink for $file ($target)"
     rm -i -rf "$target"
     ln -s "$file" "$target"
@@ -30,6 +45,6 @@ for file in $CFGFILES; do
 done
 
 # xmonad
-ln -s "$XMONADFILES/xmonad.hs" "$HOME/.xmonad/xmonad.hs"
+ln -s "$XMONADFILESDIR/xmonad.hs" "$HOME/.xmonad/xmonad.hs"
 
 echo "Done linking"

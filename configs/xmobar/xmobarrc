@@ -7,17 +7,14 @@ Config { font = "xft:JetBrainsMono Nerd Font:pixelsize=12:antialias=true:hinting
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Cpu ["-t", "\xf108  cpu: (<total>%)","-H","50","--high","red"] 20
+       , commands = [
+                      Run Cpu ["-t", "\xf108  cpu: (<total>%)","-H","50","--high","red"] 20
                     , Run Memory ["-t","\xf233  ram: <usedratio>%"] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date "\xf133  %b %d %Y - (%H:%M) " "date" 50
-					, Run StdinReader 
+                    , Run Date "\xf133  %b %d %Y - (%H:%M)" "date" 50
+					          , Run UnsafeStdinReader
+                    , Run Com "~/.local/bin/getvolume.s" [] "volume" 1
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %StdinReader%}%date%{%cpu% | %memory% "
+       , template = " %UnsafeStdinReader%}%date% | %volume%{%cpu% | %memory% "
        }

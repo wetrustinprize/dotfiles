@@ -10,6 +10,9 @@ import System.Exit
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.WithAll (killAll, sinkAll)
 
+-- DATA
+import Data.Maybe (fromJust)
+
 -- UTILS
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
@@ -19,6 +22,7 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Layout.Spacing
 import XMonad.Layout.Renamed
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
 
 -- HOOKS
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
@@ -35,6 +39,9 @@ myTerminal = "konsole" -- Sets default terminal
 myBrowser :: String
 myBrowser = "firefox" -- Sets default browser
 
+myIDE :: String
+myIDE = "code" -- Sets default IDE
+
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
@@ -48,6 +55,10 @@ windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myWorkspaces    = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"]
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 
 myBorderColor  = "#322C58" -- Normal border color
 myFocusColor = "#74B99A" -- Focused border color
@@ -89,6 +100,7 @@ myKeys =
 	-- Appliactions
 		, ("M-<Return>", spawn $ myTerminal) -- Creates a new Terminal
 		, ("M-b", spawn $ myBrowser)
+		, ("M-c", spawn $ myIDE)
 
 	-- Layouts
 		, ("M-<Space>", sendMessage NextLayout) -- Rotate through the available layout algorithms
@@ -138,11 +150,15 @@ tiled   =   avoidStruts
 			$ spacing 3
 			$ Tall 1 (3/100) (1/2)
 
+full	=	avoidStruts
+			$ spacing 3
+			$ Full
+
 monocle =   noBorders
 			$ spacing 0
 			$ Full
 
-myLayoutHook = tiled ||| monocle
+myLayoutHook = renamed [Replace "Tiled"] tiled ||| renamed [Replace "Full"] full ||| renamed [Replace "Monocle"] monocle
      -- default tiling algorithm partitions the screen into two panes
 
 ------------------------------------------------------------------------
@@ -169,9 +185,6 @@ myManageHook = composeAll
 	-- Steam stuff
 	, title     =? "Friends List" --> doFloat
 	, title		=? "Steam - News" --> doFloat
-
-	-- Will always spawn on Workspace www
-	, title =? "Mozilla Firefox" --> doShift (myWorkspaces !! 0)
 
 	-- Will aways spawn on Workspace soc
 	, resource	=? "telegram-desktop" --> doShift (myWorkspaces !! 3)
@@ -238,9 +251,9 @@ main = do
 		logHook            = dynamicLogWithPP xmobarPP
 			{ ppOutput = \x -> hPutStrLn xmproc x
 			, ppCurrent = xmobarColor "#74B99A" "" . wrap "\xe0b3" "\xe0b1"
-			, ppVisible = xmobarColor "#74B99A" ""
-			, ppHidden = xmobarColor "#C792EA" "" . wrap "\xf070 " ""
-			, ppHiddenNoWindows = xmobarColor "#B6B7D5" ""
+			, ppVisible = xmobarColor "#74B99A" "" . clickable
+			, ppHidden = xmobarColor "#C792EA" "" . wrap "\xf070 " "" . clickable
+			, ppHiddenNoWindows = xmobarColor "#B6B7D5" "" . clickable
 			, ppSep = " | "
 			, ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
 			, ppExtras = [windowCount]
