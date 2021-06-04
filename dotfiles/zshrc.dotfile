@@ -32,12 +32,14 @@ zinit light zsh-users/zsh-completions
 zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
 
 # Alias
-alias ga='git add .'
-alias gcm='git commit -m'
-alias gp='git pull'
-alias gps='git push'
-alias sudo='nocorrect sudo -E '
-alias updateall='sudo apt update -y && sudo apt upgrade -y'
+  # Better SUDO
+  alias sudo='nocorrect sudo -E '
+
+  # Update all APT
+  alias updateall='sudo apt update -y && sudo apt upgrade -y'
+
+  # Change to windows
+  alias rebootwin='sudo grub-reboot "Windows Boot Manager (on /dev/sda1)" && reboot'
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
