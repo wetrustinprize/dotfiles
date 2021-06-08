@@ -4,7 +4,6 @@ sudo -v
 
 DOTFILESDIR="$(pwd)/dotfiles/"
 CFGFILESDIR="$(pwd)/configs/"
-XMONADFILESDIR="$(pwd)/xmonad/"
 LOCALBINFILESDIR="$(pwd)/bin"
 
 # dotfiles
@@ -43,8 +42,5 @@ for file in $CFGFILES; do
     rm -i -rf "$target"
     ln -s "$file" "$target"
 done
-
-# xmonad
-ln -s "$XMONADFILESDIR/xmonad.hs" "$HOME/.xmonad/xmonad.hs"
 
 echo "Done linking"

@@ -34,7 +34,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 myTerminal :: String
-myTerminal = "konsole" -- Sets default terminal
+myTerminal = "alacritty" -- Sets default terminal
 
 myBrowser :: String
 myBrowser = "firefox" -- Sets default browser
@@ -217,7 +217,6 @@ myEventHook = mempty
 -- By default, do nothing.
 myStartupHook = do
 	spawnOnce "nitrogen --restore &"
-	spawnOnce "xscreensaver -no-splash &"
 	spawnOnce "picom --xrender-sync-fence --backend glx --experimental-backend --config ~/.config/picom.conf &"
 	spawnOnce "dunst &"
 
