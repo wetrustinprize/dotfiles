@@ -133,8 +133,10 @@ origin  git@your_server:your_user_name/your_project_name.git (fetch)
 origin  git@your_server:your_user_name/your_project_name.git (push)
 ```
 
-## References
+## Links
 
 [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/enterprise-server@2.22/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 [Adding a new SSH key to your GitHub account](https://docs.github.com/en/enterprise-server@2.22/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
 [Using Git with SSH keys](https://linuxkamarada.com/en/2019/07/14/using-git-with-ssh-keys/)
