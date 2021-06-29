@@ -22,6 +22,8 @@ PACKAGES=(
     meson
     alacritty
     xclip
+    scrot
+    nnn
 )
 
 # install packages
