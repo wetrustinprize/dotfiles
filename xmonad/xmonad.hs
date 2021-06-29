@@ -78,7 +78,7 @@ myKeys =
 		, ("M-,", prevScreen) -- Switch focus to prev monitor
 	
 	-- Screen
-		, ("M-S-l", spawn "xscreensaver-command -lock")
+		, ("M-S-l", spawn "light-locker-command --lock")
 
 	-- Run Prompt
 		, ("M-p", spawn "dmenu_run") -- Run demenu
@@ -216,8 +216,9 @@ myEventHook = mempty
 --
 -- By default, do nothing.
 myStartupHook = do
-	spawnOnce "nitrogen --restore &"
+	spawnOnce "light-locker &"
 	spawnOnce "picom --xrender-sync-fence --backend glx --experimental-backend --config ~/.config/picom.conf &"
+	spawnOnce "nitrogen --restore &"
 	spawnOnce "dunst &"
 
 	-- Social apps
