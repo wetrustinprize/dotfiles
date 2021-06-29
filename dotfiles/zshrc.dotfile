@@ -4,7 +4,7 @@ fi
 
 # Path to oh-my-zsh installation
 export ZSH=$HOME/.oh-my-zsh
-export VISUAL=nvim
+export VISUAL=code
 export EDITOR="$VISUAL"
 
 plugins=(git)
@@ -29,7 +29,11 @@ autoload -Uz _zinit
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
+zinit light rupa/z
 zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
+
+# ENV
+  ARMZ='/mnt/armazen'
 
 # Alias
   # Better SUDO
@@ -38,8 +42,35 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
   # Update all APT
   alias updateall='sudo apt update -y && sudo apt upgrade -y'
 
-  # Change to windows
-  alias rebootwin='sudo grub-reboot "Windows Boot Manager (on /dev/sda1)" && reboot'
+  # Clear
+  alias c='clear'
+
+  # nnn 
+  alias nnn='nnn -e'
+
+  # Shortcuts
+    # dev
+    alias dev='cd /mnt/armazen/dev/'
+
+    # dotfiles
+    alias dfiles='cd ~/dotfiles/'
+
+  # Git
+    # pull
+    alias gp='git pull'
+
+    # add
+    alias ga='git add .'
+
+    # commit
+    alias gc='git commit -m'
+
+    # push
+    alias gps='git push'
+
+    # status
+    alias gst='git status'
+
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
