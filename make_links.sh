@@ -15,20 +15,6 @@ for file in $DOTFILES; do
     ln -s "$file" "$target"
 done
 
-# local bin files
-if [ ! -d "$HOME/.local/bin" ]; then
-    echo "Creating ~/local/bin"
-    mkdir -p "$HOME/.local/bin"
-fi
-
-LOCALBINFILES=$(find -H "$LOCALBINFILESDIR" -maxdepth 999 2>/dev/null)
-for file in $LOCALBINFILES; do
-    target="$HOME/.local/bin/$(basename "$file")"
-    echo "Creating symlink for $file ($target)"
-    rm -i -rf "$target"
-    ln -s "$file" "$target"
-done
-
 # config files
 if [ ! -d "$HOME/.config" ]; then
     echo "Creating ~/.config"
