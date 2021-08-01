@@ -88,7 +88,8 @@ myKeys =
 		, ("M-S-l", spawn "light-locker-command --lock")
 
 	-- Run Prompt
-		, ("M-p", spawn "dmenu_run") -- Run demenu
+		--, ("M-p", spawn "dmenu_run") -- Run demenu
+		, ("M-p", spawn "rofi -show run") -- Run rofi
 
 	-- Windows
 		, ("M-S-c", kill) -- Kill focused window
@@ -174,10 +175,6 @@ myManageHook = composeAll
 	, resource  =? "gpick" --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop" --> doIgnore
-
-	-- Steam stuff
-	, title     =? "Friends List" --> doFloat
-	, title		=? "Steam - News" --> doFloat
 
 	-- Will aways spawn on Workspace soc
 	, resource	=? "telegram-desktop" --> doShift (myWorkspaces !! 3)
