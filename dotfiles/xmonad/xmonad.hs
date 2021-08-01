@@ -215,7 +215,7 @@ myStartupHook = do
 main :: IO ()
 main = do
 	-- Launches xmobar
-	xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
+	polybar <- spawnPipe "polybar main"
 
 	-- xmonad
 	xmonad $ ewmh def { 
@@ -233,17 +233,7 @@ main = do
 		-- hooks, layouts
 		layoutHook         = myLayoutHook,
 		manageHook         = (isFullscreen --> doFullFloat) <+> myManageHook <+> manageDocks,
-		handleEventHook    = myEventHook <+> docksEventHook,
+		handleEventHook    = myEventHook <+> docksEventHook <+> ewmhDesktopsEventHook,
 		startupHook        = myStartupHook,
-		logHook            = dynamicLogWithPP xmobarPP
-			{ ppOutput = \x -> hPutStrLn xmproc x
-			, ppCurrent = xmobarColor "#74B99A" "" . wrap "\xe0b3" "\xe0b1"
-			, ppVisible = xmobarColor "#74B99A" "" . clickable
-			, ppHidden = xmobarColor "#C792EA" "" . wrap "\xf070 " "" . clickable
-			, ppHiddenNoWindows = xmobarColor "#B6B7D5" "" . clickable
-			, ppSep = " | "
-			, ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"
-			, ppExtras = [windowCount]
-			, ppOrder = \(ws:l:t:ex) -> [ws,l]++ex
-		}
+		logHook            = ewmhDesktopsLogHook
 	} `additionalKeysP` myKeys

@@ -2,8 +2,9 @@
 
 from pathlib import Path
 
-from os import listdir, unlink
-from os.path import abspath, exists, isdir, islink, basename, dirname
+from shutil import rmtree
+from os import listdir, unlink, remove
+from os.path import abspath, exists, isdir, islink, basename, dirname, exists
 
 def get_to(f: str) -> str:
     is_dotfile = "dotfiles/" in f
@@ -25,8 +26,14 @@ to_link = [{
 
 for link in to_link:
     if islink(link["to"]):
-        print("File already exists in link path, removing.")
+        print("Link already exists, removing.")
         unlink(link["to"])
+    elif exists(link["to"]):
+        choice = input("File alreay exists, delete?")
+        if choice != "":
+            remove(link["to"]) if not link["dir"] else rmtree(link["to"])
+        else:
+            continue
 
     p = Path(link["to"])
     p.symlink_to(link["from"], link["dir"])
