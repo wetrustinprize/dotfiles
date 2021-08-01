@@ -32,7 +32,7 @@ font-1 = "JetBrainsMono Nerd Font Mono:size=8;1"
 
 modules-left = ewmh title
 modules-center = date
-modules-right = xkeyboard cpu memory pulseaudio
+modules-right = xkeyboard pulseaudio cpu memory
 
 tray-position = right
 tray-padding = 2
@@ -58,11 +58,10 @@ icon-7 = gfx;
 icon-8 = etc;卑
 
 label-active-foreground = ${colors.foreground}
-label-active-background = ${colors.background-alt}
 label-active-underline = ${colors.primary}
 label-active-padding = 3
 
-label-occupied-underline = #555555
+label-occupied-underline = ${colors.disabled}
 label-occupied-padding = 1
 
 label-empty = %icon%
@@ -99,8 +98,6 @@ label =  CPU %percentage%%
 [module/memory]
 type = internal/memory
 
-; Seconds to sleep between updates
-; Default: 1
 interval = 3
 
 label =  RAM %percentage_used%%
@@ -111,17 +108,22 @@ format-underline = ${colors.secondary}
 [module/pulseaudio]
 type = internal/pulseaudio
 
-sink = alsa_output.pci-0000_12_00.3.analog-stereo
+format-volume = <ramp-volume> <bar-volume>
+label-volume-foreground = ${colors.accent}
 
-use-ui-max = true
-
-interval = 5
-
-format-volume = <ramp-volume> <label-volume>
-format-volume-underline = ${colors.secondary}
-
+format-muted-foreground = ${colors.disabled}
 label-muted = ﱝ muted
-label-muted-foreground = ${colors.disabled}
+
+bar-volume-width = 8
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 1
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 1
+bar-volume-empty = ─
+bar-volume-empty-font = 1
+bar-volume-empty-foreground = ${colors.disabled}
 
 ramp-volume-0 = 墳
 
