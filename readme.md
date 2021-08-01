@@ -23,7 +23,8 @@ Welcome to my dotfiles repository! This is still a work in progress, so don't mi
 
 # Credits
 
-|                  | Author                                                                 |
-| ---------------- | ---------------------------------------------------------------------- |
-| rofi colors      | [Arctic Ice Studio](https://github.com/arcticicestudio/nord)           |
-| alacritty colors | [Arctic Ice Studio](https://github.com/arcticicestudio/nord-alacritty) |
+|                 | Author                                                                 |
+| --------------- | ---------------------------------------------------------------------- |
+| rofi theme      | [Arctic Ice Studio](https://github.com/arcticicestudio/nord)           |
+| alacritty theme | [Arctic Ice Studio](https://github.com/arcticicestudio/nord-alacritty) |
+| gtk theme       | [Eliver L.](https://github.com/EliverLara/Nordic)                      |
