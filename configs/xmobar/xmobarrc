@@ -16,5 +16,5 @@ Config { font = "xft:JetBrainsMono Nerd Font Mono:pixelsize=12:antialias=true:hi
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}%date% | %volume%{%cpu% | %memory% "
+       , template = " %UnsafeStdinReader%}%date%{%cpu% | %memory% "
        }
