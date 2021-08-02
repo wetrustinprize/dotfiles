@@ -12,7 +12,7 @@ List of features I still need to implement.
 - [ ] Remove all warnings
 - [ ] Make the config more organized
 
-## Python
+## Python installing
 
 - [x] Make dotfiles and configs symlink using Python
 - [ ] Custom arguments to select what will be installed using `python3 .`
