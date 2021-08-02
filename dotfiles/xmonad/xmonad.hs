@@ -45,7 +45,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
 myBorderWidth :: Dimension
-myBorderWidth = 1 -- Width of the window border in pixels.
+myBorderWidth = 2 -- Width of the window border in pixels.
 
 myModMask :: KeyMask
 myModMask = mod4Mask -- Sets modkey to super key
@@ -66,7 +66,7 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 -- COLORS
 -- Colors used
 --------------------------------------------------
-myBorderColor  = "#322C58" -- Normal border color
+myBorderColor  = "#2e3440" -- Normal border color
 myFocusColor = "#74B99A" -- Focused border color
 
 --------------------------------------------------
