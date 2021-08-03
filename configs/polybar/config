@@ -30,8 +30,9 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = "JetBrainsMono Nerd Font:size=10;0"
+font-1 = "JetBrainsMono Nerd Font:size=8;1"
 
-modules-left = cpu memory
+modules-left = memory cpu
 modules-center = ewmh
 modules-right = xkeyboard pulseaudio date
 
@@ -60,6 +61,7 @@ label-active-underline = ${colors.primary}
 label-active-padding = 3
 
 label-occupied = %icon%
+label-occupied-foreground = ${colors.foreground}
 label-occupied-underline = ${colors.disabled}
 label-occupied-padding = 1
 
@@ -68,7 +70,8 @@ label-empty-foreground = ${colors.disabled}
 label-empty-padding = 1
 
 label-urgent = %icon%
-label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.alert}
+label-urgent-uderline = ${colors.alert}
 label-urgent-padding = 1
 
 [module/date]
@@ -86,37 +89,20 @@ type = internal/cpu
 
 interval = 0.5
 
-format = <label> <ramp-load>
+format =  CPU <label>
+format-font = 2
 
-label =  CPU
-
-ramp-load-spacing = 1
-ramp-load-0 = ▁
-ramp-load-1 = ▂
-ramp-load-2 = ▃
-ramp-load-3 = ▄
-ramp-load-4 = ▅
-ramp-load-5 = ▆
-ramp-load-6 = ▇
-ramp-load-7 = █
+label =  %percentage%%
 
 [module/memory]
 type = internal/memory
 
 interval = 3
 
-label =  RAM 
+label = %percentage_used%%
 
-format = <label> <ramp-used>
-
-ramp-used-0 = ▁
-ramp-used-1 = ▂
-ramp-used-2 = ▃
-ramp-used-3 = ▄
-ramp-used-4 = ▅
-ramp-used-5 = ▆
-ramp-used-6 = ▇
-ramp-used-7 = █
+format =  RAM <label>
+format-font = 2
 
 [module/pulseaudio]
 type = internal/pulseaudio

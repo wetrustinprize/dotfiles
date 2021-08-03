@@ -7,6 +7,10 @@ List of features I still need to implement.
 1. [xmonad](#xmonad)
 2. [Python](#Python)
 
+## dunst
+
+- [ ] learn how to configure lol
+
 ## xmonad
 
 - [ ] Remove all warnings
