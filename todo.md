@@ -2,14 +2,19 @@
 
 List of features I still need to implement.
 
-## Table of contents
-
-1. [xmonad](#xmonad)
-2. [Python](#Python)
+- [TODO List](#todo-list)
+  - [dunst](#dunst)
+  - [polybar](#polybar)
+  - [xmonad](#xmonad)
+  - [Python installing](#python-installing)
 
 ## dunst
 
 - [ ] learn how to configure lol
+
+## polybar
+
+- [ ] Change the icon theme for the tray
 
 ## xmonad
 
