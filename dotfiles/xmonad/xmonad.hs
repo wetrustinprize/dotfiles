@@ -36,7 +36,7 @@ myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "firefox" -- Sets default browser
+myBrowser = "brave-browser" -- Sets default browser
 
 myIDE :: String
 myIDE = "code" -- Sets default IDE
@@ -168,7 +168,7 @@ myLayoutHook = renamed [Replace "Tiled"] tiled ||| renamed [Replace "Full"] full
 -- MANAGE HOOK
 -- Sets how specific applications should startup as
 -- [ doFloat: Starts floating
--- [ doShift: Shifts to a spefici workspace
+-- [ doShift: Shifts to a specific workspace
 --------------------------------------------------
 myManageHook = composeAll
     [ resource  =? "bitwarden" --> doFloat
@@ -176,11 +176,12 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop" --> doIgnore
 
-	-- Will aways spawn on Workspace soc
+	-- Will always spawn on Workspace soc
 	, resource	=? "telegram-desktop" --> doShift (myWorkspaces !! 3)
 	, resource	=? "kesty-whatsapp" --> doShift (myWorkspaces !! 3)
 	, resource	=? "discord" --> doShift (myWorkspaces !! 3)
 	, resource  =? "steam" --> doShift (myWorkspaces !! 3)
+	, resource 	=? "element" --> doShift (myWorkspaces !! 3)
 
 	-- Will always spawn on Workspace gfx
 	, resource =? "krita" --> doShift (myWorkspaces !! 7)
@@ -203,8 +204,9 @@ myStartupHook = do
 	spawnOnce "dunst &"
 
 	-- Social apps
-	spawnOnce "telegram-desktop"
-	spawnOnce "discord"
+	spawnOnce "telegram-desktop &"
+	spawnOnce "discord &"
+	spawnOnce "element-desktop &"
 
 --------------------------------------------------
 -- MAIN
