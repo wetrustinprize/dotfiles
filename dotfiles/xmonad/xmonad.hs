@@ -9,6 +9,7 @@ import System.Exit ( exitWith, ExitCode(ExitSuccess) )
 -- ACTIONS
 import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.WithAll (killAll, sinkAll)
+import XMonad.Actions.SpawnOn (spawnHere, manageSpawn)
 
 -- DATA
 import Data.Maybe (fromJust)
@@ -90,6 +91,7 @@ myKeys =
 	-- Run Prompt
 		--, ("M-p", spawn "dmenu_run") -- Run demenu
 		, ("M-p", spawn "rofi -show run") -- Run rofi
+		, ("M-S-p", spawn "rofi -show drun") -- Run rofi desktop
 
 	-- Windows
 		, ("M-S-c", kill) -- Kill focused window
@@ -104,11 +106,12 @@ myKeys =
 		, ("M-S-t", sinkAll) -- Push all windows back into tiling
 		, ("M-S-<Up>", sendMessage (IncMasterN 1)) -- Increment the number of windows in the master area
 		, ("M-S-<Down>", sendMessage (IncMasterN (-1))) -- Deincrement the number of windows in the master area
+		, ("M-S-<Tab>", spawn "rofi -show window")
 
 	-- Appliactions
-		, ("M-<Return>", spawn $ myTerminal) -- Creates a new Terminal
-		, ("M-b", spawn $ myBrowser)
-		, ("M-c", spawn $ myIDE)
+		, ("M-<Return>", spawnHere myTerminal) -- Creates a new Terminal
+		, ("M-b", spawnHere myBrowser)
+		, ("M-c", spawnHere myIDE)
 
 	-- Layouts
 		, ("M-<Space>", sendMessage NextLayout) -- Rotate through the available layout algorithms
@@ -121,6 +124,11 @@ myKeys =
 		, ("<XF86AudioMute>", spawn "amixer -D pulse sset Master toggle")
 		, ("<XF86AudioLowerVolume>", spawn "amixer -D pulse sset Master 5%- unmute")
 		, ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse sset Master 5%+ unmute")
+
+		-- Spotify only
+		, ("<XF86AudioPlay>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause")
+		, ("<XF86AudioNext>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next")
+		, ("<XF86AudioPrev>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous")
 
     ]
 
@@ -231,7 +239,7 @@ main = do
 
 		-- hooks, layouts
 		layoutHook         = myLayoutHook,
-		manageHook         = (isFullscreen --> doFullFloat) <+> myManageHook <+> manageDocks,
+		manageHook         = (isFullscreen --> doFullFloat) <+> myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
 		handleEventHook    = myEventHook <+> docksEventHook <+> ewmhDesktopsEventHook,
 		startupHook        = myStartupHook,
 		logHook            = ewmhDesktopsLogHook
