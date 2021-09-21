@@ -42,6 +42,9 @@ myBrowser = "brave-browser" -- Sets default browser
 myIDE :: String
 myIDE = "code" -- Sets default IDE
 
+myExplorer :: String
+myExplorer = "nautilus" -- Sets default file explorer
+
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
@@ -112,6 +115,7 @@ myKeys =
 		, ("M-<Return>", spawnHere myTerminal) -- Creates a new Terminal
 		, ("M-b", spawnHere myBrowser)
 		, ("M-c", spawnHere myIDE)
+		, ("M-e", spawnHere myExplorer)
 
 	-- Layouts
 		, ("M-<Space>", sendMessage NextLayout) -- Rotate through the available layout algorithms
