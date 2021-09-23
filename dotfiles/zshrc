@@ -42,34 +42,11 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
   # Update all APT
   alias updateall='sudo apt update -y && sudo apt upgrade -y'
 
-  # Clear
-  alias c='clear'
+  # ls > lsd
+  alias ls='lsd'
 
   # nnn 
   alias nnn='nnn -e'
-
-  # Shortcuts
-    # dev
-    alias dev='cd /mnt/armazen/dev/'
-
-    # dotfiles
-    alias dfiles='cd ~/dotfiles/'
-
-  # Git
-    # pull
-    alias gp='git pull'
-
-    # add
-    alias ga='git add .'
-
-    # commit
-    alias gc='git commit -m'
-
-    # push
-    alias gps='git push'
-
-    # status
-    alias gst='git status'
 
 
 # Theme
