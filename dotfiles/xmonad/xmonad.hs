@@ -194,9 +194,6 @@ myManageHook = composeAll
 	, resource	=? "discord" --> doShift (myWorkspaces !! 3)
 	, resource  =? "steam" --> doShift (myWorkspaces !! 3)
 	, resource 	=? "element" --> doShift (myWorkspaces !! 3)
-
-	-- Will always spawn on Workspace gfx
-	, resource =? "krita" --> doShift (myWorkspaces !! 7)
 	]
 
 --------------------------------------------------
