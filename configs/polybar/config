@@ -31,6 +31,7 @@ module-margin-right = 2
 
 font-0 = "JetBrainsMono Nerd Font:size=10;0"
 font-1 = "JetBrainsMono Nerd Font:size=8;1"
+font-2 = "JetBrainsMono Nerd Font:size=7;1"
 
 modules-left = memory cpu system-nvidia-smi fs-root fs-armazen
 modules-center = ewmh
@@ -162,8 +163,8 @@ label-mounted = %mountpoint%: %free%
 label-unmounted = %mountpoint%
 label-unmounted-foreground = ${colors.disabled}
 
-format-mounted-font = 2
-format-unmounted-font = 2
+format-mounted-font = 3
+format-unmounted-font = 3
 
 [module/fs-root]
 inherit = fs-base
