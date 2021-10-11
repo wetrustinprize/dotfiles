@@ -32,7 +32,7 @@ module-margin-right = 2
 font-0 = "JetBrainsMono Nerd Font:size=10;0"
 font-1 = "JetBrainsMono Nerd Font:size=8;1"
 
-modules-left = memory cpu system-nvidia-smi
+modules-left = memory cpu system-nvidia-smi fs-root fs-armazen
 modules-center = ewmh
 modules-right = xkeyboard pulseaudio date
 
@@ -153,3 +153,28 @@ interval = 1
 
 format =  GPU <label>%
 format-font = 2
+
+[fs-base]
+type = internal/fs
+fixed-values = true
+label-mounted = %mountpoint%: %free%
+
+label-unmounted = %mountpoint%
+label-unmounted-foreground = ${colors.disabled}
+
+format-mounted-font = 2
+format-unmounted-font = 2
+
+[module/fs-root]
+inherit = fs-base
+
+mount-0 = /
+label-mounted =  / %free%
+label-unmounted =  /
+
+[module/fs-armazen]
+inherit = fs-base
+
+mount-0 = /mnt/armazen
+label-mounted =  / %free%
+label-unmounted =  /
