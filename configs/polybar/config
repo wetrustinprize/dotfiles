@@ -5,6 +5,10 @@ disabled = #4c566a
 primary = #8FBCBB
 secondary = #88C0D0
 alert = #BF616A
+danger = #D08770
+warning = #EBCB8B
+good = #A3BE8C
+purple = #B48EAD
 
 [bar/main]
 wm-restack = generic
@@ -92,20 +96,34 @@ type = internal/cpu
 
 interval = 1
 
-format =  CPU <label>
+format =  CPU <bar-load>
 format-font = 2
 
-label =  %percentage%%
+bar-load-indicator = 
+bar-load-width = 5
+
+bar-load-fill = ▐
+bar-load-foreground = {$colors.foreground}
+
+bar-load-empty = ▐
+bar-load-empty-foreground = ${colors.disabled}
 
 [module/memory]
 type = internal/memory
 
 interval = 3
 
-label = %percentage_used%%
-
-format =  RAM <label>
+format =  RAM <bar-used>
 format-font = 2
+
+bar-used-indicator = 
+bar-used-width = 5
+
+bar-used-fill = ▐
+bar-used-foreground = {$colors.foreground}
+
+bar-used-empty = ▐
+bar-used-empty-foreground = ${colors.disabled}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -152,7 +170,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/system-nvidia-smi.sh
 interval = 1
 
-format =  GPU <label>%
+format =  GPU <label>
 format-font = 2
 
 [fs-base]
