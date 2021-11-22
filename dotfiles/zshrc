@@ -45,6 +45,12 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
   # nnn 
   alias nnn='nnn -e'
 
+# Sudo
+  # Grub reboot Windows
+  function gotowindows {
+    sudo grub-reboot 1
+    sudo reboot now
+  }
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
