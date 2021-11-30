@@ -193,7 +193,6 @@ myManageHook = composeAll
 	, resource	=? "kesty-whatsapp" --> doShift (myWorkspaces !! 3)
 	, resource	=? "discord" --> doShift (myWorkspaces !! 3)
 	, resource  =? "steam" --> doShift (myWorkspaces !! 3)
-	, resource 	=? "element" --> doShift (myWorkspaces !! 3)
 	]
 
 --------------------------------------------------
@@ -215,7 +214,6 @@ myStartupHook = do
 	-- Social apps
 	spawnOnce "telegram-desktop &"
 	spawnOnce "discord &"
-	spawnOnce "element-desktop &"
 
 --------------------------------------------------
 -- MAIN
