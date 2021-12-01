@@ -213,7 +213,7 @@ myStartupHook = do
 
 	-- Social apps
 	spawnOnce "telegram-desktop &"
-	spawnOnce "discord &"
+	spawnOnce "discord"
 
 --------------------------------------------------
 -- MAIN
