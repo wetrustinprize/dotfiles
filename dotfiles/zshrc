@@ -4,7 +4,11 @@ fi
 
 # Path to oh-my-zsh installation
 export ZSH=$HOME/.oh-my-zsh
+
+# My visual code editor
 export VISUAL=code
+
+# My default code editor
 export EDITOR="$VISUAL"
 
 plugins=(git)
@@ -33,7 +37,7 @@ zinit light rupa/z
 zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
 
 # ENV
-  ARMZ='/mnt/armazen'
+  export ARMZ='/mnt/armazen'
 
 # Alias
   # Better SUDO
