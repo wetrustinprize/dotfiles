@@ -102,11 +102,21 @@ format-font = 2
 bar-load-indicator = 
 bar-load-width = 5
 
-bar-load-fill = ▐
+bar-load-fill = 
 bar-load-foreground = {$colors.foreground}
 
-bar-load-empty = ▐
+bar-load-empty = 
 bar-load-empty-foreground = ${colors.disabled}
+
+[module/system-nvidia-smi]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/system-nvidia-smi.sh
+interval = 1
+
+format =  GPU <label>
+format-font = 2
+
 
 [module/memory]
 type = internal/memory
@@ -119,10 +129,10 @@ format-font = 2
 bar-used-indicator = 
 bar-used-width = 5
 
-bar-used-fill = ▐
+bar-used-fill = 
 bar-used-foreground = {$colors.foreground}
 
-bar-used-empty = ▐
+bar-used-empty = 
 bar-used-empty-foreground = ${colors.disabled}
 
 [module/pulseaudio]
@@ -139,9 +149,9 @@ bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 1
 bar-volume-indicator-foreground = #ff
-bar-volume-fill = ─
+bar-volume-fill = -
 bar-volume-fill-font = 1
-bar-volume-empty = ─
+bar-volume-empty = -
 bar-volume-empty-font = 1
 bar-volume-empty-foreground = ${colors.disabled}
 

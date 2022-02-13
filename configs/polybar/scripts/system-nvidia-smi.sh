@@ -4,8 +4,8 @@
 color_used="%{F#eceff4}"
 color_unused="%{F#4c566a}"
 
-char_fill="▐"
-char_empty="▐"
+char_fill=""
+char_empty=""
 
 total_bars=4
 
