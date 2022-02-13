@@ -1,2 +1,5 @@
 picom
 __pycache__
+
+dotfiles/xmonad/*
+!dotfiles/xmonad/xmonad.hs
