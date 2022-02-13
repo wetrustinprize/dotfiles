@@ -25,6 +25,6 @@ Welcome to my dotfiles repository! This is still a work in progress, so don't mi
 
 |                 | Author                                                                 |
 | --------------- | ---------------------------------------------------------------------- |
-| rofi theme      | [Arctic Ice Studio](https://github.com/arcticicestudio/nord)           |
+| rofi theme      | [undiabler](https://github.com/undiabler/nord-rofi-theme)              |
 | alacritty theme | [Arctic Ice Studio](https://github.com/arcticicestudio/nord-alacritty) |
 | gtk theme       | [Eliver L.](https://github.com/EliverLara/Nordic)                      |
