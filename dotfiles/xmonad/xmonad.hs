@@ -24,7 +24,7 @@ myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "vivaldi" -- Sets default browser
+myBrowser = "vivaldi-stable" -- Sets default browser
 
 myIDE :: String
 myIDE = "code" -- Sets default IDE
