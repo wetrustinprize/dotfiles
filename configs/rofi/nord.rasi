@@ -8,7 +8,7 @@
 
 configuration {
 
-	font: "Envy Code R 10";
+	font: "Jetbrains Mono R 12";
 	width: 30;
 	line-margin: 10;
 	lines: 6;
@@ -105,6 +105,10 @@ listview {
     border: 0px 1px 1px 1px;
     background-color: rgba(46,52,64,0.9);
     dynamic: false;
+}
+
+element-text {
+    text-color: @nord4;
 }
 
 element {
