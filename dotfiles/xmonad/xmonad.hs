@@ -185,9 +185,11 @@ myManageHook =
       resource =? "kdesktop" --> doIgnore,
       -- Will always spawn on Workspace soc
       resource =? "telegram-desktop" --> doShift (myWorkspaces !! 3),
-      resource =? "kesty-whatsapp" --> doShift (myWorkspaces !! 3),
+      resource =? "whatsapp-nativefier" --> doShift (myWorkspaces !! 3),
       resource =? "discord" --> doShift (myWorkspaces !! 3),
-      resource =? "steam" --> doShift (myWorkspaces !! 3)
+      resource =? "steam" --> doShift (myWorkspaces !! 3),
+      -- Will always spawn on Workspace mus
+      resource =? "spotify" --> doShift (myWorkspaces !! 4)
     ]
 
 --------------------------------------------------
@@ -208,7 +210,9 @@ myStartupHook = do
 
   -- Social apps
   spawnOnce "telegram-desktop &"
-  spawnOnce "discord"
+  spawnOnce "discord &"
+  spawnOnce "whatsapp-nativefier &"
+  spawnOnce "spotify &"
 
 --------------------------------------------------
 -- MAIN
