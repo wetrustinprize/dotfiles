@@ -85,8 +85,8 @@ tray-position = left
 [module/ewmh]
 type = internal/xworkspaces
 
-enable-click = true
-enable-scroll = true
+enable-click = false
+enable-scroll = false
 
 icon-0 = www;
 icon-1 = dev;
