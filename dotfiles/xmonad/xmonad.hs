@@ -185,7 +185,7 @@ myManageHook =
       resource =? "kdesktop" --> doIgnore,
       -- Will always spawn on Workspace soc
       resource =? "telegram-desktop" --> doShift (myWorkspaces !! 3),
-      resource =? "whatsapp-nativefier" --> doShift (myWorkspaces !! 3),
+      resource =? "whatsapp-nativefier-d40211" --> doShift (myWorkspaces !! 3),
       resource =? "discord" --> doShift (myWorkspaces !! 3),
       resource =? "steam" --> doShift (myWorkspaces !! 3),
       -- Will always spawn on Workspace mus
@@ -220,7 +220,8 @@ myStartupHook = do
 main :: IO ()
 main = do
   -- Launches xmobar
-  polybar <- spawnPipe "polybar main"
+  polybarMain <- spawnPipe "polybar main"
+  polybarSecondary <- spawnPipe "polybar secondary"
 
   -- xmonad
   xmonad $
