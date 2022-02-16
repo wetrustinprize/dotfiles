@@ -167,7 +167,10 @@ monocle =
     spacing 0 $
       Full
 
-myLayoutHook = renamed [Replace "Tiled"] tiled ||| renamed [Replace "Full"] full ||| renamed [Replace "Monocle"] monocle
+myLayoutHook =
+  renamed [Replace "Tiled"] tiled
+    ||| renamed [Replace "Full"] full
+    ||| renamed [Replace "Monocle"] monocle
 
 -- default tiling algorithm partitions the screen into two panes
 
