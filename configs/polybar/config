@@ -10,10 +10,8 @@ warning = #EBCB8B
 good = #A3BE8C
 purple = #B48EAD
 
-[bar/secondary]
+[section/base]
 wm-restack = generic
-
-monitor = HDMI-0
 
 width = 100%
 height = 27
@@ -25,7 +23,10 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 3
+border-top-size = 0
+border-right-size = 3
+border-bottom-size = 3
+border-left-size = 3
 border-color = #00000000
 
 padding-left = 2
@@ -37,46 +38,21 @@ module-margin-right = 2
 font-0 = "JetBrainsMono Nerd Font:size=10;0"
 font-1 = "JetBrainsMono Nerd Font:size=8;1"
 font-2 = "JetBrainsMono Nerd Font:size=7;1"
-
-modules-center = date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/secondary]
+inherit = section/base
+monitor = HDMI-0
+modules-center = date
+
 [bar/main]
-wm-restack = generic
-
-monitor = DP-4
-
-width = 100%
-height = 27
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-line-color = #f00
-
-border-size = 3
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = "JetBrainsMono Nerd Font:size=10;0"
-font-1 = "JetBrainsMono Nerd Font:size=8;1"
-font-2 = "JetBrainsMono Nerd Font:size=7;1"
+inherit = section/base
 
 modules-left = memory cpu system-nvidia-smi fs-root fs-armazen fs-games 
 modules-center = date
 modules-right = xkeyboard second-monitor-dimmer do-not-disturb pulseaudio
-
-cursor-click = pointer
-cursor-scroll = ns-resize
 
 tray-position = left
 
