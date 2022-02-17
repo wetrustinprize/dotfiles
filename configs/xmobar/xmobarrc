@@ -1,20 +1,17 @@
-Config { font = "xft:JetBrainsMono Nerd Font Mono:pixelsize=12:antialias=true:hinting=true"
-       , additionalFonts = []
-       , borderColor = "black"
-       , bgColor = "#322c58"
-       , fgColor = "grey"
-       , position = Static { xpos = 5, ypos = 3, width = 1910, height = 23 }
-       , iconRoot = "."
-       , allDesktops = True
-       , overrideRedirect = True
-       , commands = [
-                      Run Cpu ["-t", "\xf108  cpu: (<total>%)","-H","50","--high","red"] 20
-                    , Run Memory ["-t","\xf233  ram: <usedratio>%"] 10
-                    , Run Date "\xf133  %b %d %Y - (%H:%M)" "date" 50
-					          , Run UnsafeStdinReader
-                    , Run Com "~/.local/bin/getvolume.s" [] "volume" 1
-                    ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}%date%{%cpu% | %memory% "
-       }
+Config
+  { font = "xft:JetBrainsMono Nerd Font Mono:pixelsize=14:antialias=true:hinting=true",
+    additionalFonts = [],
+    borderColor = "black",
+    bgColor = "#2E3440",
+    fgColor = "#ECEFF4",
+    position = BottomP 3 3,
+    iconRoot = ".",
+    allDesktops = True,
+    overrideRedirect = True,
+    commands =
+      [ Run UnsafeStdinReader
+      ],
+    sepChar = "%",
+    alignSep = "}{",
+    template = " }%UnsafeStdinReader%{"
+  }
