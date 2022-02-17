@@ -2,23 +2,23 @@
 -- IMPORTS
 ---------------------------------------
 import qualified Data.Map as M
-import Data.Maybe (fromJust)
-import System.Exit (ExitCode (ExitSuccess), exitWith)
+import Data.Maybe
+import System.Exit
 import XMonad
-import XMonad.Actions.CycleWS (WSType (..), moveTo, nextScreen, prevScreen, shiftTo)
-import XMonad.Actions.SpawnOn (manageSpawn, spawnHere)
-import XMonad.Actions.WithAll (killAll, sinkAll)
-import XMonad.Hooks.DynamicLog (PP (..), dynamicLogWithPP, shorten, wrap, xmobarColor, xmobarPP)
+import XMonad.Actions.CycleWS
+import XMonad.Actions.SpawnOn
+import XMonad.Actions.WithAll
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks)
-import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.Renamed (Rename (Replace), renamed)
-import XMonad.Layout.Spacing (spacing)
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
+import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.Run (hPutStrLn, spawnPipe)
-import XMonad.Util.SpawnOnce (spawnOnce)
+import XMonad.Util.EZConfig
+import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 
 myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
@@ -50,11 +50,26 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 --------------------------------------------------
 myWorkspaces = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"]
 
+-- Icon for each workspace
+myWorkspacesIcons = ["\xf484", "\xe795", "\xf718", "\xf415", "\xf001", "\xe712", "\xf03d", "\xf040", "\xfa35"]
+
+-- Indices
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y -> (x,y)
 
+myWorkspaceIconIndices = M.fromList $ zipWith (,) myWorkspaces myWorkspacesIcons
+
+-- Clickable function
 clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>"
   where
     i = fromJust $ M.lookup ws myWorkspaceIndices
+
+-- Show icon and name
+iconName ws = icon ws ++ " " ++ ws
+
+-- Show only icon
+icon ws = i
+  where
+    i = fromJust $ M.lookup ws myWorkspaceIconIndices
 
 --------------------------------------------------
 -- COLORS
@@ -222,9 +237,13 @@ myStartupHook = do
 --------------------------------------------------
 main :: IO ()
 main = do
-  -- Launches xmobar
+  -- Launches polybar
   polybarMain <- spawnPipe "polybar main"
   polybarSecondary <- spawnPipe "polybar secondary"
+
+  -- Launches xmobar
+  xmobarMain <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc"
+  xmobarSecondary <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc"
 
   -- xmonad
   xmonad $
@@ -244,6 +263,42 @@ main = do
           manageHook = (isFullscreen --> doFullFloat) <+> myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
           handleEventHook = myEventHook <+> docksEventHook <+> ewmhDesktopsEventHook,
           startupHook = myStartupHook,
-          logHook = ewmhDesktopsLogHook
+          logHook =
+            ewmhDesktopsLogHook
+              <+> dynamicLogWithPP
+                xmobarPP
+                  { ppOutput = \x ->
+                      hPutStrLn xmobarMain x
+                        >> hPutStrLn xmobarSecondary x,
+                    -- Current selected workspace
+                    ppCurrent =
+                      xmobarColor "#eceff4" ""
+                        . wrap
+                          "<box type=Bottom width=3 color=#8FBCBB>  "
+                          "  </box>"
+                        . iconName,
+                    ppVisible =
+                      xmobarColor "#8FBCBB" ""
+                        . wrap
+                          "<box type=Bottom width=3 color=#8FBCBB>  "
+                          "  </box>"
+                        . icon,
+                    ppHidden =
+                      xmobarColor "#ECEFF4" ""
+                        . wrap
+                          "<box type=Bottom width=3 color=#4C566A> "
+                          " </box>"
+                        . icon,
+                    ppHiddenNoWindows =
+                      xmobarColor "#4C566A" ""
+                        . wrap
+                          " "
+                          " "
+                        . icon,
+                    ppSep = " | ",
+                    ppUrgent = xmobarColor "#BF616A" "" . wrap "!" "!",
+                    ppExtras = [windowCount],
+                    ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex
+                  }
         }
       `additionalKeysP` myKeys
