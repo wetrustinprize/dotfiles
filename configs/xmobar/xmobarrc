@@ -4,7 +4,7 @@ Config
     borderColor = "black",
     bgColor = "#2E3440",
     fgColor = "#ECEFF4",
-    position = BottomP 3 3,
+    position = Bottom,
     iconRoot = ".",
     allDesktops = True,
     overrideRedirect = True,
