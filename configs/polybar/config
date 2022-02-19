@@ -45,7 +45,10 @@ cursor-scroll = ns-resize
 [bar/secondary]
 inherit = section/base
 monitor = HDMI-0
+
+modules-left = memory cpu system-nvidia-smi 
 modules-center = date
+modules-right = fs-root fs-armazen fs-games
 
 [bar/main]
 inherit = section/base
@@ -54,7 +57,7 @@ modules-left = memory cpu system-nvidia-smi fs-root fs-armazen fs-games
 modules-center = date
 modules-right = xkeyboard second-monitor-dimmer do-not-disturb pulseaudio
 
-tray-position = left
+tray-position = right
 
 [module/date]
 type = internal/date
