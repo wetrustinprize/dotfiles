@@ -20,6 +20,12 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
 
+--------------------------------------------------
+-- CONFIGURATION
+-- Configuration variables
+--------------------------------------------------
+
+-- PROGRAMS
 myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
 
@@ -32,23 +38,36 @@ myIDE = "code" -- Sets default IDE
 myExplorer :: String
 myExplorer = "nautilus" -- Sets default file explorer
 
+-- XMONAD SPECIFIC
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True -- Whether focus follows the mouse pointer.
 
+-- BORDERS
 myBorderWidth :: Dimension
 myBorderWidth = 2 -- Width of the window border in pixels.
 
-myModMask :: KeyMask
-myModMask = mod4Mask -- Sets modkey to super key
+myBorderColor :: String
+myBorderColor = "#2e3440" -- Normal border color
 
-windowCount :: X (Maybe String)
-windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+myFocusColor :: String
+myFocusColor = "#74B99A" -- Focused border color
+
+-- WORKSPACES
+myModMask :: KeyMask
+myModMask = mod4Mask -- Sets the modkey
+
+myWorkspaces = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"] -- Sets the named workspaces
+
+-- SPACING
+-- TODO: NOT CHANGING
+mySpacing :: Int
+mySpacing = 3 -- Sets the spacing
 
 --------------------------------------------------
 -- WORKSPACES
--- MY workspaces
 --------------------------------------------------
-myWorkspaces = ["www", "dev", "doc", "soc", "mus", "sys", "vid", "gfx", "etc"]
+
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 -- Icon for each workspace
 myWorkspacesIcons = ["\xf484", "\xe795", "\xf718", "\xf415", "\xf001", "\xe712", "\xf03d", "\xf040", "\xfa35"]
@@ -65,14 +84,6 @@ iconName ws = icon ws ++ " " ++ ws
 icon ws = i
   where
     i = fromJust $ M.lookup ws myWorkspaceIconIndices
-
---------------------------------------------------
--- COLORS
--- Colors used
---------------------------------------------------
-myBorderColor = "#2e3440" -- Normal border color
-
-myFocusColor = "#74B99A" -- Focused border color
 
 --------------------------------------------------
 -- KEYBINDS
@@ -138,19 +149,17 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ( (modm, button1),
-        ( \w ->
-            focus w >> mouseMoveWindow w
-              >> windows W.shiftMaster
-        )
+        \w ->
+          focus w >> mouseMoveWindow w
+            >> windows W.shiftMaster
       ),
       -- mod-button2, Raise the window to the top of the stack
-      ((modm, button2), (\w -> focus w >> windows W.shiftMaster)),
+      ((modm, button2), \w -> focus w >> windows W.shiftMaster),
       -- mod-button3, Set the window to floating mode and resize by dragging
       ( (modm, button3),
-        ( \w ->
-            focus w >> mouseResizeWindow w
-              >> windows W.shiftMaster
-        )
+        \w ->
+          focus w >> mouseResizeWindow w
+            >> windows W.shiftMaster
       )
       -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
@@ -164,12 +173,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
 tiled =
   avoidStruts $
-    spacing 3 $
+    spacing mySpacing $
       Tall 1 (3 / 100) (1 / 2)
 
 full =
   avoidStruts $
-    spacing 3 $
+    spacing mySpacing $
       Full
 
 monocle =
@@ -202,13 +211,10 @@ myManageHook =
       resource =? "discord" --> doShift (myWorkspaces !! 3),
       resource =? "steam" --> doShift (myWorkspaces !! 3),
       -- Will always spawn on Workspace mus
-      resource =? "spotify" --> doShift (myWorkspaces !! 4)
+      resource =? "spotify" --> doShift (myWorkspaces !! 4),
+      -- Make fullscreen windows float
+      isFullscreen --> doFullFloat
     ]
-
---------------------------------------------------
--- EVENT HANDLING
---------------------------------------------------
-myEventHook = mempty
 
 --------------------------------------------------
 -- STARTUP HOOK
@@ -241,7 +247,7 @@ main = do
   xmobarSecondary <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc"
 
   -- xmonad
-  xmonad $
+  xmonad $ docks $ ewmhFullscreen $
     ewmh
       def
         { terminal = myTerminal,
@@ -255,12 +261,11 @@ main = do
           mouseBindings = myMouseBindings,
           -- hooks, layouts
           layoutHook = myLayoutHook,
-          manageHook = (isFullscreen --> doFullFloat) <+> myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
-          handleEventHook = myEventHook <+> docksEventHook <+> ewmhDesktopsEventHook,
+          manageHook = myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
+          handleEventHook = handleEventHook def,
           startupHook = myStartupHook,
           logHook =
-            ewmhDesktopsLogHook
-              <+> dynamicLogWithPP
+              dynamicLogWithPP
                 xmobarPP
                   { ppOutput = \x ->
                       hPutStrLn xmobarMain x
