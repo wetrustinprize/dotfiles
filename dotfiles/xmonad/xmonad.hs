@@ -58,11 +58,6 @@ myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y
 
 myWorkspaceIconIndices = M.fromList $ zipWith (,) myWorkspaces myWorkspacesIcons
 
--- Clickable function
-clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>"
-  where
-    i = fromJust $ M.lookup ws myWorkspaceIndices
-
 -- Show icon and name
 iconName ws = icon ws ++ " " ++ ws
 
