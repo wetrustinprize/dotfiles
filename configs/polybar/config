@@ -49,9 +49,9 @@ modules-right = fs-root fs-armazen fs-games
 [bar/main]
 inherit = section/base
 
-modules-left = memory cpu system-nvidia-smi fs-root fs-armazen fs-games 
+modules-left = memory cpu system-nvidia-smi fs-root fs-armazen
 modules-center = date
-modules-right = xkeyboard second-monitor-dimmer do-not-disturb pulseaudio
+modules-right = xkeyboard monitor-redshift do-not-disturb pulseaudio
 
 tray-position = right
 
@@ -174,21 +174,14 @@ mount-0 = /mnt/armazen
 label-mounted =  / %free%
 label-unmounted =  / unmounted
 
-[module/fs-games]
-inherit = fs-base
-
-mount-0 = /mnt/games
-label-mounted =  / %free%
-label-unmounted =  / unmounted
-
 [module/do-not-disturb]
 type = custom/script
 exec = ~/.config/polybar/scripts/do-not-disturb.sh
 tail = true
 click-left = "kill -USR1 %pid%"
 
-[module/second-monitor-dimmer]
+[module/monitor-redshift]
 type = custom/script
-exec = ~/.config/polybar/scripts/second-monitor-dimmer.sh
+exec = ~/.config/polybar/scripts/monitor-redshift.sh
 tail = true
 click-left = "kill -USR1 %pid%"

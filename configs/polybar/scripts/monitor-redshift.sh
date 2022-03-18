@@ -4,8 +4,6 @@
 color_enabled="%{F#eceff4}"
 color_disabled="%{F#4c566a}"
 icon=""
-monitor_name="HDMI-0"
-monitor_low_brightness=0.5
 
 # do not edit below this line
 enabled=0
@@ -17,9 +15,9 @@ sleep_pid=0
 toggle() {
 
     if [ $t -eq 0 ]; then
-        xrandr --output $monitor_name --brightness $monitor_low_brightness
+        redshift -o -t 3700:3700 -l 0.0:0.0
     else
-        xrandr --output $monitor_name --brightness 1
+        redshift -x
     fi
 
     if [ "$sleep_pid" -ne 0 ]; then
