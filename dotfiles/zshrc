@@ -12,6 +12,7 @@ export VISUAL=code
 export EDITOR="$VISUAL"
 
 plugins=(git)
+plugins=(asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -50,9 +51,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
   alias nnn='nnn -e'
 
 # Sudo
-  # Grub reboot Windows
+  # Systemmd reboot Windows
   function gotowindows {
-    sudo grub-reboot 1
+    sudo bootctl set-oneshot auto-windows
     sudo reboot now
   }
 
@@ -65,3 +66,4 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# bindkey -v # vim mode
