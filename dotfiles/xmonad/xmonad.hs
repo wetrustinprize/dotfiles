@@ -19,6 +19,10 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+import XMonad.Layout.Reflect
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.MultiColumns
 
 --------------------------------------------------
 -- CONFIGURATION
@@ -127,6 +131,8 @@ myKeys =
     ("M-e", spawnHere myExplorer),
     -- Layouts
     ("M-<Space>", sendMessage NextLayout), -- Rotate through the available layout algorithms
+    ("M-x", sendMessage $ Toggle REFLECTX),
+    ("M-y", sendMessage $ Toggle MIRROR),
 
     -- Print
     ("<Print>", spawn "sleep 0.2; scrot -e 'xclip -selection clipboard -t image/png $f' -s"), -- Selection screenshot
@@ -173,23 +179,34 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
 tiled =
   avoidStruts $
-    spacing mySpacing $
-      Tall 1 (3 / 100) (1 / 2)
+  mkToggle (single REFLECTX) $
+  mkToggle (single MIRROR) $
+  spacing mySpacing $
+    Tall 1 (3 / 100) (1 / 2)
 
 full =
   avoidStruts $
-    spacing mySpacing $
-      Full
+  spacing mySpacing $
+     Full
+
+multiCols =
+  avoidStruts $
+  mkToggle (single REFLECTX) $ 
+  mkToggle (single MIRROR) $
+  spacing mySpacing $
+    multiCol [1] 1 0.01 (-0.5)
 
 monocle =
   noBorders $
-    spacing 0 $
-      Full
+  spacing 0 $
+    Full
 
-myLayoutHook =
-  renamed [Replace "Tiled"] tiled
-    ||| renamed [Replace "Full"] full
-    ||| renamed [Replace "Monocle"] monocle
+myLayoutHook =  
+   tiled
+    |||  full
+    |||  monocle
+    |||  multiCols
+                    
 
 -- default tiling algorithm partitions the screen into two panes
 
