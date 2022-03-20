@@ -40,15 +40,18 @@ timeout = 4
 background = "#2E3440"
 foreground = "#eceff4"
 frame_color = "#A3BE8C"
+highlight = "#A3BE8C"
 
 [urgency_normal]
 timeout = 8
 background = "#2E3440"
 foreground = "#eceff4"
 frame_color = "#8FBCBB"
+highlight = "#8FBCBB"
 
 [urgency_critical]
 timeout = 0
 background = "#2E3440"
 foreground = "#eceff4"
 frame_color = "#BF616A"
+highlight = "#BF616A"
