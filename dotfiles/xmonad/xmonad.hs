@@ -139,9 +139,9 @@ myKeys =
     ("S-<Print>", spawn "sleep 0.2; scrot -e 'xclip -selection clipboard -t image/png $f'"), -- Fullscreen screenshot
 
     -- Multimedia Keys
-    ("<XF86AudioMute>", spawn "amixer -D pulse sset Master toggle"),
-    ("<XF86AudioLowerVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh -d"),
-    ("<XF86AudioRaiseVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh"),
+    ("<XF86AudioMute>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh toggle"),
+    ("<XF86AudioLowerVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh down"),
+    ("<XF86AudioRaiseVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh up"),
     -- Spotify only
     ("<XF86AudioPlay>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"),
     ("<XF86AudioNext>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"),

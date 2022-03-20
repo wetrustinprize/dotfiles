@@ -1,5 +1,7 @@
 picom
 __pycache__
 
+# xmonad stuff
 dotfiles/xmonad/*
 !dotfiles/xmonad/xmonad.hs
+!dotfiles/xmonad/scripts
