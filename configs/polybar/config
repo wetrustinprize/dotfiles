@@ -51,7 +51,7 @@ inherit = section/base
 
 modules-left = memory cpu system-nvidia-smi fs-root fs-armazen
 modules-center = date
-modules-right = xkeyboard monitor-redshift do-not-disturb pulseaudio
+modules-right = xkeyboard monitor-redshift do-not-disturb mute-mic pulseaudio
 
 tray-position = right
 
@@ -183,5 +183,11 @@ click-left = "kill -USR1 %pid%"
 [module/monitor-redshift]
 type = custom/script
 exec = ~/.config/polybar/scripts/monitor-redshift.sh
+tail = true
+click-left = "kill -USR1 %pid%"
+
+[module/mute-mic]
+type = custom/script
+exec = ~/.config/polybar/scripts/mute-mic.sh
 tail = true
 click-left = "kill -USR1 %pid%"
