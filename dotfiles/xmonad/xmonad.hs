@@ -109,6 +109,7 @@ myKeys =
     --, ("M-p", spawn "dmenu_run") -- Run demenu
     ("M-p", spawn "rofi -show run"), -- Run rofi
     ("M-S-p", spawn "rofi -show drun"), -- Run rofi desktop
+    ("M-S-e", spawn "rofimoji -a copy"), -- Run rofi emoji
 
     -- Windows
     ("M-S-c", kill), -- Kill focused window
