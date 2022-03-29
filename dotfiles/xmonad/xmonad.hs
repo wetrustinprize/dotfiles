@@ -109,7 +109,7 @@ myKeys =
     --, ("M-p", spawn "dmenu_run") -- Run demenu
     ("M-p", spawn "rofi -show run"), -- Run rofi
     ("M-S-p", spawn "rofi -show drun"), -- Run rofi desktop
-    ("M-S-e", spawn "rofimoji -a copy"), -- Run rofi emoji
+    ("M-e", spawn "rofimoji"), -- Run rofi emoji
 
     -- Windows
     ("M-S-c", kill), -- Kill focused window
@@ -125,11 +125,13 @@ myKeys =
     ("M-S-<Up>", sendMessage (IncMasterN 1)), -- Increment the number of windows in the master area
     ("M-S-<Down>", sendMessage (IncMasterN (-1))), -- Deincrement the number of windows in the master area
     ("M-S-<Tab>", spawn "rofi -show window"),
+    
     -- Appliactions
     ("M-<Return>", spawnHere myTerminal), -- Creates a new Terminal
     ("M-b", spawnHere myBrowser),
     ("M-c", spawnHere myIDE),
-    ("M-e", spawnHere myExplorer),
+    ("M-f", spawnHere myExplorer),
+
     -- Layouts
     ("M-<Space>", sendMessage NextLayout), -- Rotate through the available layout algorithms
     ("M-x", sendMessage $ Toggle REFLECTX),
@@ -143,6 +145,7 @@ myKeys =
     ("<XF86AudioMute>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh toggle"),
     ("<XF86AudioLowerVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh down"),
     ("<XF86AudioRaiseVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh up"),
+
     -- Spotify only
     ("<XF86AudioPlay>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"),
     ("<XF86AudioNext>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"),
