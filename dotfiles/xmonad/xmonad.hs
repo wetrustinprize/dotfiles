@@ -82,9 +82,15 @@ myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y
 myWorkspaceIconIndices = M.fromList $ zipWith (,) myWorkspaces myWorkspacesIcons
 
 -- Show icon and name
+clickableIconName ws = "<action=xdotool key super+"++show i++">"++iconName ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 iconName ws = icon ws ++ " " ++ ws
 
 -- Show only icon
+clickableIcon ws = "<action=xdotool key super+"++show i++">"++icon ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 icon ws = i
   where
     i = fromJust $ M.lookup ws myWorkspaceIconIndices
@@ -297,25 +303,25 @@ main = do
                         . wrap
                           "<box type=Bottom width=3 color=#8FBCBB>  "
                           "  </box>"
-                        . iconName,
+                        . clickableIconName,
                     ppVisible =
                       xmobarColor "#8FBCBB" ""
                         . wrap
                           "<box type=Bottom width=3 color=#8FBCBB>  "
                           "  </box>"
-                        . icon,
+                        . clickableIcon,
                     ppHidden =
                       xmobarColor "#ECEFF4" ""
                         . wrap
                           "<box type=Bottom width=3 color=#4C566A> "
                           " </box>"
-                        . icon,
+                        . clickableIcon,
                     ppHiddenNoWindows =
                       xmobarColor "#4C566A" ""
                         . wrap
                           " "
                           " "
-                        . icon,
+                        . clickableIcon,
                     ppSep = " | ",
                     ppUrgent = xmobarColor "#BF616A" "" . wrap "!" "!",
                     ppExtras = [windowCount],
