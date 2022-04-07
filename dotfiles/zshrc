@@ -44,11 +44,8 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
   # Better SUDO
   alias sudo='nocorrect sudo -E '
 
-  # Update all APT
-  alias updateall='sudo apt update -y && sudo apt upgrade -y'
-
-  # nnn 
-  alias nnn='nnn -e'
+  # Fuck
+  eval $(thefuck --alias)
 
 # Sudo
   # Systemmd reboot Windows
