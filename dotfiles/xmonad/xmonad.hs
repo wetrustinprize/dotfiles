@@ -12,17 +12,19 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Grid
+import XMonad.Layout.MultiColumns
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Reflect
 import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
-import XMonad.Layout.Reflect
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.MultiColumns
 
 --------------------------------------------------
 -- CONFIGURATION
@@ -82,14 +84,16 @@ myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y
 myWorkspaceIconIndices = M.fromList $ zipWith (,) myWorkspaces myWorkspacesIcons
 
 -- Show icon and name
-clickableIconName ws = "<action=xdotool key super+"++show i++">"++iconName ws++"</action>"
-    where i = fromJust $ M.lookup ws myWorkspaceIndices
+clickableIconName ws = "<action=xdotool key super+" ++ show i ++ ">" ++ iconName ws ++ "</action>"
+  where
+    i = fromJust $ M.lookup ws myWorkspaceIndices
 
 iconName ws = icon ws ++ " " ++ ws
 
 -- Show only icon
-clickableIcon ws = "<action=xdotool key super+"++show i++">"++icon ws++"</action>"
-    where i = fromJust $ M.lookup ws myWorkspaceIndices
+clickableIcon ws = "<action=xdotool key super+" ++ show i ++ ">" ++ icon ws ++ "</action>"
+  where
+    i = fromJust $ M.lookup ws myWorkspaceIndices
 
 icon ws = i
   where
@@ -131,18 +135,15 @@ myKeys =
     ("M-S-<Up>", sendMessage (IncMasterN 1)), -- Increment the number of windows in the master area
     ("M-S-<Down>", sendMessage (IncMasterN (-1))), -- Deincrement the number of windows in the master area
     ("M-S-<Tab>", spawn "rofi -show window"),
-    
     -- Appliactions
     ("M-<Return>", spawnHere myTerminal), -- Creates a new Terminal
     ("M-b", spawnHere myBrowser),
     ("M-c", spawnHere myIDE),
     ("M-f", spawnHere myExplorer),
-
     -- Layouts
     ("M-<Space>", sendMessage NextLayout), -- Rotate through the available layout algorithms
     ("M-x", sendMessage $ Toggle REFLECTX),
     ("M-y", sendMessage $ Toggle MIRROR),
-
     -- Print
     ("<Print>", spawn "sleep 0.2; scrot -e 'xclip -selection clipboard -t image/png $f' -s"), -- Selection screenshot
     ("S-<Print>", spawn "sleep 0.2; scrot -e 'xclip -selection clipboard -t image/png $f'"), -- Fullscreen screenshot
@@ -151,7 +152,6 @@ myKeys =
     ("<XF86AudioMute>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh toggle"),
     ("<XF86AudioLowerVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh down"),
     ("<XF86AudioRaiseVolume>", spawn "/bin/sh ~/.xmonad/scripts/changevolume.sh up"),
-
     -- Spotify only
     ("<XF86AudioPlay>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"),
     ("<XF86AudioNext>", spawn "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"),
@@ -187,36 +187,39 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 -- [ monocle: Shows only one window with no struts
 --------------------------------------------------
 
-tiled =
-  avoidStruts $
-  mkToggle (single REFLECTX) $
-  mkToggle (single MIRROR) $
-  spacing mySpacing $
-    Tall 1 (3 / 100) (1 / 2)
-
-full =
-  avoidStruts $
-  spacing mySpacing $
-     Full
-
-multiCols =
-  avoidStruts $
-  mkToggle (single REFLECTX) $ 
-  mkToggle (single MIRROR) $
-  spacing mySpacing $
-    multiCol [1] 1 0.01 (-0.5)
-
-monocle =
-  noBorders $
-  spacing 0 $
-    Full
-
-myLayoutHook =  
-   tiled
-    |||  full
-    |||  monocle
-    |||  multiCols
-                    
+myLayoutHook =
+  onWorkspace "soc" socLayouts $
+    onWorkspace "doc" docLayouts $
+      (tiled ||| full ||| monocle ||| multiCols)
+  where
+    socLayouts = (grid ||| full ||| monocle)
+    docLayouts = (multiCols ||| full ||| monocle)
+    tiled =
+      avoidStruts $
+        mkToggle (single REFLECTX) $
+          mkToggle (single MIRROR) $
+            spacing mySpacing $
+              Tall 1 (3 / 100) (1 / 2)
+    full =
+      avoidStruts $
+        spacing mySpacing $
+          Full
+    multiCols =
+      avoidStruts $
+        mkToggle (single REFLECTX) $
+          mkToggle (single MIRROR) $
+            spacing mySpacing $
+              multiCol [1] 1 0.01 (-0.5)
+    monocle =
+      noBorders $
+        spacing 0 $
+          Full
+    grid =
+      avoidStruts $
+        mkToggle (single REFLECTX) $
+          mkToggle (single MIRROR) $
+            spacing mySpacing $
+              Grid
 
 -- default tiling algorithm partitions the screen into two panes
 
@@ -274,58 +277,60 @@ main = do
   xmobarSecondary <- spawnPipe "xmobar -x 1 $HOME/.config/xmobar/xmobarrc"
 
   -- xmonad
-  xmonad $ docks $ ewmhFullscreen $
-    ewmh
-      def
-        { terminal = myTerminal,
-          focusFollowsMouse = myFocusFollowsMouse,
-          borderWidth = myBorderWidth,
-          modMask = myModMask,
-          workspaces = myWorkspaces,
-          normalBorderColor = myBorderColor,
-          focusedBorderColor = myFocusColor,
-          -- key bindings
-          mouseBindings = myMouseBindings,
-          -- hooks, layouts
-          layoutHook = myLayoutHook,
-          manageHook = myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
-          handleEventHook = handleEventHook def,
-          startupHook = myStartupHook,
-          logHook =
-              dynamicLogWithPP
-                xmobarPP
-                  { ppOutput = \x ->
-                      hPutStrLn xmobarMain x
-                        >> hPutStrLn xmobarSecondary x,
-                    -- Current selected workspace
-                    ppCurrent =
-                      xmobarColor "#eceff4" ""
-                        . wrap
-                          "<box type=Bottom width=3 color=#8FBCBB>  "
-                          "  </box>"
-                        . clickableIconName,
-                    ppVisible =
-                      xmobarColor "#8FBCBB" ""
-                        . wrap
-                          "<box type=Bottom width=3 color=#8FBCBB>  "
-                          "  </box>"
-                        . clickableIcon,
-                    ppHidden =
-                      xmobarColor "#ECEFF4" ""
-                        . wrap
-                          "<box type=Bottom width=3 color=#4C566A> "
-                          " </box>"
-                        . clickableIcon,
-                    ppHiddenNoWindows =
-                      xmobarColor "#4C566A" ""
-                        . wrap
-                          " "
-                          " "
-                        . clickableIcon,
-                    ppSep = " | ",
-                    ppUrgent = xmobarColor "#BF616A" "" . wrap "!" "!",
-                    ppExtras = [windowCount],
-                    ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex
-                  }
-        }
-      `additionalKeysP` myKeys
+  xmonad $
+    docks $
+      ewmhFullscreen $
+        ewmh
+          def
+            { terminal = myTerminal,
+              focusFollowsMouse = myFocusFollowsMouse,
+              borderWidth = myBorderWidth,
+              modMask = myModMask,
+              workspaces = myWorkspaces,
+              normalBorderColor = myBorderColor,
+              focusedBorderColor = myFocusColor,
+              -- key bindings
+              mouseBindings = myMouseBindings,
+              -- hooks, layouts
+              layoutHook = myLayoutHook,
+              manageHook = myManageHook <+> manageDocks <+> manageSpawn <+> manageHook def,
+              handleEventHook = handleEventHook def,
+              startupHook = myStartupHook,
+              logHook =
+                dynamicLogWithPP
+                  xmobarPP
+                    { ppOutput = \x ->
+                        hPutStrLn xmobarMain x
+                          >> hPutStrLn xmobarSecondary x,
+                      -- Current selected workspace
+                      ppCurrent =
+                        xmobarColor "#eceff4" ""
+                          . wrap
+                            "<box type=Bottom width=3 color=#8FBCBB>  "
+                            "  </box>"
+                          . clickableIconName,
+                      ppVisible =
+                        xmobarColor "#8FBCBB" ""
+                          . wrap
+                            "<box type=Bottom width=3 color=#8FBCBB>  "
+                            "  </box>"
+                          . clickableIcon,
+                      ppHidden =
+                        xmobarColor "#ECEFF4" ""
+                          . wrap
+                            "<box type=Bottom width=3 color=#4C566A> "
+                            " </box>"
+                          . clickableIcon,
+                      ppHiddenNoWindows =
+                        xmobarColor "#4C566A" ""
+                          . wrap
+                            " "
+                            " "
+                          . clickableIcon,
+                      ppSep = " | ",
+                      ppUrgent = xmobarColor "#BF616A" "" . wrap "!" "!",
+                      ppExtras = [windowCount],
+                      ppOrder = \(ws : l : t : ex) -> [ws, l] ++ ex
+                    }
+            }
+          `additionalKeysP` myKeys
