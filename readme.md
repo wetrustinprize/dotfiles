@@ -10,6 +10,8 @@ Files stored in `dotfiles` should be symlinked to `$HOME`, and files stores in `
 
 - [ ] Auto install script
   - Automatically symlinks all the files in their specific location
+- [ ] Better `xmonad` config
+  - Organize each parte of the Xmonad config in their own file
 
 # Helpful Guides
 * [Xmonad installation guide](https://xmonad.org/INSTALL.html), better than using the `aur` or `pacman` packages.
