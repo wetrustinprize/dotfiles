@@ -1,3 +1,4 @@
+# p10k stuff
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -11,6 +12,28 @@ export VISUAL=code
 # My default code editor
 export EDITOR="$VISUAL"
 
+# Alias
+  # Better SUDO
+  alias sudo='nocorrect sudo -E '
+
+  # Fuck
+  eval $(thefuck --alias)
+
+# Sudo
+  # Systemmd reboot Windows
+  function gotowindows {
+    sudo bootctl set-oneshot auto-windows
+    sudo reboot now
+  }
+
+# Custom paths
+  ## Yarn bin
+  export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+  ## Local bin
+  export PATH="$HOME/.local/bin:$PATH"
+
+# Plugins
 plugins=(git)
 plugins=(asdf)
 
@@ -35,24 +58,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light rupa/z
-zinit ice depth=1; zinit light romkatv/powerlevel10k # Powerlevel10k Theme
-
-# ENV
-  export ARMZ='/mnt/armazen'
-
-# Alias
-  # Better SUDO
-  alias sudo='nocorrect sudo -E '
-
-  # Fuck
-  eval $(thefuck --alias)
-
-# Sudo
-  # Systemmd reboot Windows
-  function gotowindows {
-    sudo bootctl set-oneshot auto-windows
-    sudo reboot now
-  }
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -60,7 +66,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-# bindkey -v # vim mode
+
+[ -f "/home/wetrustinprize/.ghcup/env" ] && source "/home/wetrustinprize/.ghcup/env" # ghcup-env
