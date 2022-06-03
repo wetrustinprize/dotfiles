@@ -44,12 +44,12 @@ monitor = HDMI-0
 
 modules-left = memory cpu system-nvidia-smi 
 modules-center = date
-modules-right = fs-root fs-armazen fs-games
+modules-right = fs-root fs-home fs-armazen fs-games
 
 [bar/main]
 inherit = section/base
 
-modules-left = memory cpu system-nvidia-smi fs-root fs-armazen
+modules-left = memory cpu system-nvidia-smi fs-root fs-home fs-armazen
 modules-center = date
 modules-right = xkeyboard monitor-redshift do-not-disturb mute-mic pulseaudio
 
@@ -161,6 +161,13 @@ format-mounted-font = 3
 format-unmounted-font = 3
 
 [module/fs-root]
+inherit = fs-base
+
+mount-0 = /
+label-mounted =  / %free%
+label-unmounted =  / unmounted
+
+[module/fs-home]
 inherit = fs-base
 
 mount-0 = /home
