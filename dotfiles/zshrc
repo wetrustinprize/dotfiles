@@ -19,19 +19,15 @@ export EDITOR="$VISUAL"
   # Fuck
   eval $(thefuck --alias)
 
-# Sudo
-  # Systemmd reboot Windows
-  function gotowindows {
-    sudo bootctl set-oneshot auto-windows
-    sudo reboot now
-  }
-
 # Custom paths
   ## Yarn bin
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
   ## Local bin
   export PATH="$HOME/.local/bin:$PATH"
+
+  ## Vulkan stuff
+  export VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/nvidia_icd.json"
 
 # Plugins
 plugins=(git)
@@ -69,4 +65,4 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-[ -f "/home/wetrustinprize/.ghcup/env" ] && source "/home/wetrustinprize/.ghcup/env" # ghcup-env
+[ -f "/home/wetrustinprize/.ghcup/env" ] && source "/home/wetrustinprize/.ghcup/env" # ghcup-envexport PATH=$PATH:/home/wetrustinprize/.spicetify
