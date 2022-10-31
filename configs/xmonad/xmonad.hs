@@ -117,8 +117,8 @@ myKeys =
     ("M-S-l", spawn "light-locker-command --lock"),
     -- Run Prompt
     --, ("M-p", spawn "dmenu_run") -- Run demenu
-    ("M-p", spawn "rofi -show run"), -- Run rofi
-    ("M-S-p", spawn "rofi -show drun"), -- Run rofi desktop
+    ("M-S-p", spawn "rofi -show run"), -- Run rofi
+    ("M-p", spawn "rofi -show drun"), -- Run rofi desktop
     ("M-e", spawn "rofimoji"), -- Run rofi emoji
 
     -- Windows
@@ -240,8 +240,6 @@ myManageHook =
       resource =? "whatsapp-nativefier-d40211" --> doShift (myWorkspaces !! 3),
       resource =? "discord" --> doShift (myWorkspaces !! 3),
       resource =? "steam" --> doShift (myWorkspaces !! 3),
-      -- Will always spawn on Workspace mus
-      resource =? "spotify" --> doShift (myWorkspaces !! 4),
       -- Make fullscreen windows float
       isFullscreen --> doFullFloat
     ]
