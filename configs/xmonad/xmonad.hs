@@ -36,7 +36,7 @@ myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "vivaldi-stable" -- Sets default browser
+myBrowser = "brave" -- Sets default browser
 
 myIDE :: String
 myIDE = "code" -- Sets default IDE
