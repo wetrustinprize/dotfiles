@@ -16,9 +16,6 @@ export EDITOR="$VISUAL"
   # Better SUDO
   alias sudo='nocorrect sudo -E '
 
-  # Fuck
-  eval $(thefuck --alias)
-
 # Custom paths
   ## Yarn bin
   export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
