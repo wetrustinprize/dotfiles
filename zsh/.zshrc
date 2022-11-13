@@ -19,8 +19,13 @@ export ZSH=$HOME/.oh-my-zsh
 #     OH-MY-ZSH    #
 #      PLUGINS     #
 ####################
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
-plugins=(git)
+plugins=(
+  git # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+  web-search # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search
+  copyfile # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/copyfile
+  history # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/history
+  jsontools # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jsontools
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -52,25 +57,18 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ####################
-#     BINDINGS     #
+#       ENVS       #
 ####################
-
 export VISUAL=code # My visual code editor
-export EDITOR="nevim" # My default code editor
+export EDITOR="nvim" # My default code editor
 
 ####################
-#      PATHS       #
+#       ALIAS      #
 ####################
 alias sudo='nocorrect sudo -E ' # Better SUDO
 
 ####################
-#      PATHS       #
+#      PATH        #
 ####################
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" ## Yarn bin
-
 export PATH="$HOME/.local/bin:$PATH" ## Local bin
-
-####################
-#    AUTO TMUX     #
-####################
-if [ "$TMUX" = "" ]; then tmux; fi
