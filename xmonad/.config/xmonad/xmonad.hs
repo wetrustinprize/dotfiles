@@ -36,10 +36,10 @@ myTerminal :: String
 myTerminal = "alacritty" -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "firefox" -- Sets default browser
+myBrowser = "vivaldi-stable" -- Sets default browser
 
 myIDE :: String
-myIDE = "alacritty -e nvim" -- Sets default IDE
+myIDE = "code" -- Sets default IDE
 
 myExplorer :: String
 myExplorer = "nautilus" -- Sets default file explorer
