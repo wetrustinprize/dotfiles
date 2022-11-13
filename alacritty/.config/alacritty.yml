@@ -3,6 +3,9 @@ font:
     family: JetBrainsMono Nerd Font Mono
     style: Regular
 
+env:
+  TERM: xterm-256color
+
 # Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
 # Copyright (c) 2017-present Sven Greb <code@svengreb.de>
 
