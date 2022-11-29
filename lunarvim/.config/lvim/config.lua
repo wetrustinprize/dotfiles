@@ -56,6 +56,9 @@ linters.setup {
   {
     command = "eslint_d",
     filetypes = { "typescript", "typescriptreact" },
+  },
+  {
+    command = "write_good"
   }
 }
 
@@ -65,6 +68,10 @@ formatters.setup {
     command = "eslint_d",
     filetypes = { "typescript", "typescriptreact" },
   },
+  {
+    command = "prettier",
+    filetypes = { "markdown", "markdown.mdx" },
+  }
 }
 
 -- PLUGINS
