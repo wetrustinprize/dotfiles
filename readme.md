@@ -1,17 +1,10 @@
-# Prize's Dotfiles
+The dotfiles are managed by using *GNU Stow*, which is a symlink manager.
 
-[![Made with Visual Studio Code](https://img.shields.io/badge/Made%20with-Visual%20Studio%20Code-informational?style=flat-square&logo=visualstudiocode)](https://github.com/Microsoft/vscode)
+To link a configuration you must run `stow` with the program name, like so:
 
-Welcome to my dotfiles repository!
-
-Files stored in `dotfiles` should be symlinked to `$HOME`, and files stores in `configs` should be symlinked to `$HOME/.config`.
-
-# Todo
-
-- [ ] Auto install script
-  - Automatically symlinks all the files in their specific location
-- [ ] Better `xmonad` config
-  - Organize each part of the Xmonad config in their own file
+```bash
+$ stow lunarvim
+```
 
 # Helpful Guides
 * [Xmonad installation guide](https://xmonad.org/INSTALL.html), better than using the `aur` or `pacman` packages.
