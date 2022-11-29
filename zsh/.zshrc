@@ -25,6 +25,7 @@ plugins=(
   copyfile # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/copyfile
   history # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/history
   jsontools # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jsontools
+  tmux # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -61,6 +62,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ####################
 export VISUAL=code # My visual code editor
 export EDITOR="nvim" # My default code editor
+
+# oh-my-zsh tmux plugin
+export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
+export ZSH_TMUX_FIXTERM=false
 
 ####################
 #       ALIAS      #
