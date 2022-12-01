@@ -6,19 +6,16 @@ lvim.colorscheme = "nord"
 -- KEYMAPPINGS
 lvim.leader = "space"
 
+-- hop
+lvim.lsp.buffer_mappings.normal_mode["H"] = { ":HopWord<CR>", "Hop word" }
+
+-- scribble
 lvim.builtin.which_key.mappings["n"] = {
 	name = "Notes",
 	n = { ":ScribbleOpen<cr>", "Default note" },
 	N = { ":ScribbleNew<cr>", "New note" },
 	f = { ":ScribbleFind<cr>", "Find note" },
 }
-
--- LVIM BUILTINS
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- PARSERS
 lvim.builtin.treesitter.ensure_installed = {
@@ -97,6 +94,22 @@ lvim.plugins = {
 		"wetrustinprize/scribble.nvim",
 		config = function()
 			require("scribble").setup({})
+		end,
+	},
+	{
+		"karb94/neoscroll.nvim",
+		event = "WinScrolled",
+		config = function()
+			require("neoscroll").setup({
+				mappings = { "<C-u>", "<C-d>" },
+			})
+		end,
+	},
+	{
+		"phaazon/hop.nvim",
+		event = "BufRead",
+		config = function()
+			require("hop").setup()
 		end,
 	},
 }
