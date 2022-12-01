@@ -87,7 +87,14 @@ lvim.plugins = {
 	--   cmd = "TroubleToggle",
 	-- },
 	{ "arcticicestudio/nord-vim" },
-	{ "andweeb/presence.nvim" },
+	{
+		"andweeb/presence.nvim",
+		config = function()
+			require("presence"):setup({
+				main_image = "file",
+			})
+		end,
+	},
 	{ "christoomey/vim-tmux-navigator" },
 	{ "MunifTanjim/nui.nvim" },
 	{
