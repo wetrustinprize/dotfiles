@@ -251,7 +251,7 @@ myManageHook =
 myStartupHook = do
   -- System stuff
   spawnOnce "light-locker &"
-  spawnOnce "picom --xrender-sync-fence --backend glx --experimental-backend --config ~/.config/picom.conf &"
+  spawnOnce "picom --xrender-sync-fence --backend glx --config ~/.config/picom.conf &"
   spawnOnce "nitrogen --restore &"
   spawnOnce "dunst &"
 
