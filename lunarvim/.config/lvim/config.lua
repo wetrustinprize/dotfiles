@@ -9,12 +9,12 @@ lvim.leader = "space"
 -- hop
 lvim.lsp.buffer_mappings.normal_mode["H"] = { ":HopWord<CR>", "Hop word" }
 
--- scribble
+-- scribe
 lvim.builtin.which_key.mappings["n"] = {
 	name = "Notes",
-	n = { ":ScribbleOpen<cr>", "Default note" },
-	N = { ":ScribbleNew<cr>", "New note" },
-	f = { ":ScribbleFind<cr>", "Find note" },
+	n = { ":ScribeOpen<cr>", "Default note" },
+	N = { ":ScribeNew<cr>", "New note" },
+	f = { ":ScribeFind<cr>", "Find note" },
 }
 
 -- PARSERS
@@ -91,9 +91,9 @@ lvim.plugins = {
 	{ "christoomey/vim-tmux-navigator" },
 	{ "MunifTanjim/nui.nvim" },
 	{
-		"wetrustinprize/scribble.nvim",
+		"wetrustinprize/scribe.nvim",
 		config = function()
-			require("scribble").setup({})
+			require("scribe").setup({})
 		end,
 	},
 	{
