@@ -39,8 +39,8 @@ bindsym $mod+F3 exec pcmanfm
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 
 # Print bindings
-bindsym Print exec --no-startup-id i3-scrot -wc
-bindsym Shift+Print --release exec --no-startup-id i3-scrot -sc
+bindsym Print --release exec --no-startup-id i3-scrot -sc
+bindsym Shift+Print exec --no-startup-id i3-scrot -wc
 bindsym Ctrl+Print exec --notstartup-id i3-scrot -dc
 
 # Change focus
@@ -214,7 +214,7 @@ exec --no-startup-id whatsapp-nativefier
 exec --no-startup-id spotify
 
 exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id fix_xcursor "Nordzy-cursors"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Theme colors (Nord)
