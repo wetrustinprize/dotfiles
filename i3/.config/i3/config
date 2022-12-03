@@ -39,9 +39,9 @@ bindsym $mod+F3 exec pcmanfm
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 
 # Print bindings
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id i3-scrot -wc
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -sc
+bindsym Ctrl+Print exec --notstartup-id i3-scrot -dc
 
 # Change focus
 bindsym $mod+h focus left
