@@ -143,8 +143,8 @@ bindsym $mod+less move workspace to output left
 
 # Open applications on specific workspaces
 assign [class="whatsapp-nativefier-*"] $ws3
-assign [class="discord"] $ws3
-assign [class="Telegram"] $ws3
+assign [class="discord"] $ws4
+assign [class="Telegram"] $ws4
 assign [class="Spotify"] $ws5
 
 # Open specific applications in floating mode
@@ -204,11 +204,8 @@ bindsym $mod+9 exec --no-startup-id blurlock
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
-exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
 exec --no-startup-id xautolock -time 10 -locker blurlock
 
 exec --no-startup-id discord
