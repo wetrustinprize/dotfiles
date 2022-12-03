@@ -98,14 +98,14 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1:\xf484
-set $ws2 2:\xe795
-set $ws3 3:\xf718
-set $ws4 4:\xf415
-set $ws5 5:\xf001
-set $ws6 6:\xe712
-set $ws7 7:\xf03d
-set $ws8 8:\xf040
+set $ws1 1:www
+set $ws2 2:dev
+set $ws3 3:doc
+set $ws4 4:soc
+set $ws5 5:mus
+set $ws6 6:vid
+set $ws7 7:sys
+set $ws8 8:otr
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -138,14 +138,14 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
-# assign [class="Pale moon"] $ws2
-# assign [class="Pcmanfm"] $ws3
-# assign [class="Skype"] $ws5
+assign [class="whatsapp-nativefier-*"] $ws3
+assign [class="discord"] $ws3
+assign [class="Telegram"] $ws3
+assign [class="Spotify"] $ws5
 
 # Open specific applications in floating mode
 for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="bitwarden"] floating enable
+for_window [class="Bitwarden"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -207,16 +207,15 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
+
+exec --no-startup-id discord
+exec --no-startup-id telegram-desktop
+exec --no-startup-id whatsapp-nativefier
+exec --no-startup-id spotify
+
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-  i3bar_command $HOME/.config/polybar/launch.sh
-}
-
-# hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Theme colors (Nord)
 # https://github.com/sarvesh-codeprism/i3wm-nord/blob/main/i3/config
@@ -234,11 +233,8 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
+gaps inner 12
 gaps outer -2
-
-# Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
