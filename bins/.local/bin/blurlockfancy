@@ -1,0 +1,29 @@
+# lock the screen
+i3lock \
+  -B 2 \
+  -k \
+  -S 1 \
+  --indicator \
+  --ring-color=4C566A \
+  --inside-color=2E3440 \
+  --ringver-color=81A1C1 \
+  --insidever-color=2E3440 \
+  --ringwrong-color=BF616A \
+  --insidewrong-color=2E3440 \
+  --line-color=00000000 \
+  --keyhl-color=A3BE8C \
+  --bshl-color=BF616A \
+  --separator-color=00000000 \
+  --verif-color=81A1C1 \
+  --wrong-color=BF616A \
+  --modif-color=ECEFF4 \
+  --time-color=ECEFF4 \
+  --date-color=ECEFF4 \
+  --pass-power-keys \
+  --pass-media-keys \
+  --pass-volume-keys
+
+# sleep 1 adds a small delay to prevent possible race conditions with suspend
+sleep 1
+
+exit 0
