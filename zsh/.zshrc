@@ -61,11 +61,14 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 #       ENVS       #
 ####################
 export VISUAL=code # My visual code editor
-export EDITOR="nvim" # My default code editor
+export EDITOR="lvim" # My default code editor
 
 # oh-my-zsh tmux plugin
 export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 export ZSH_TMUX_FIXTERM=false
+
+# mono fix
+export FrameworkPathOverride="/lib/mono/4.8-api"
 
 ####################
 #       ALIAS      #
