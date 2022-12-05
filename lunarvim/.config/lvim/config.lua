@@ -100,7 +100,11 @@ lvim.plugins = {
   -- { "ThePrimeagen/vim-be-good" },
   { "nkakouros-original/numbers.nvim",
     config = function()
-      require("numbers").setup({})
+      require("numbers").setup({
+        excluded_filetypes = {
+          'alpha'
+        }
+      })
     end
   },
   {
