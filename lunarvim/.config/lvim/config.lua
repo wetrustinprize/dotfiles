@@ -1,5 +1,4 @@
--- GENERAL
-lvim.log.level = "warn"
+-- GENERAL lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
 lvim.colorscheme = "nord"
 
@@ -8,6 +7,15 @@ lvim.leader = "space"
 
 -- hop
 lvim.lsp.buffer_mappings.normal_mode["H"] = { ":HopWord<CR>", "Hop word" }
+
+-- trouble
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Trouble",
+  t = { ":TroubleToggle<cr>", "Toggle Trouble" },
+  r = { ":TroubleToggle lsp_references<cr>", "Trouble references" },
+  d = { ":TroubleToggle lsp_definitions<cr>", "Trouble definitions" },
+  f = { ":TodoTrouble<cr>", "Trouble fixmes" }
+}
 
 -- scribe
 lvim.builtin.which_key.mappings["n"] = {
@@ -82,10 +90,6 @@ formatters.setup({
 
 -- PLUGINS
 lvim.plugins = {
-  -- {
-  --   "folke/trouble.nvim",
-  --   cmd = "TroubleToggle",
-  -- },
   { "arcticicestudio/nord-vim" },
   {
     "andweeb/presence.nvim",
@@ -96,8 +100,6 @@ lvim.plugins = {
     end,
   },
   { "christoomey/vim-tmux-navigator" },
-  { "MunifTanjim/nui.nvim" },
-  -- { "ThePrimeagen/vim-be-good" },
   { "nkakouros-original/numbers.nvim",
     config = function()
       require("numbers").setup({
@@ -109,6 +111,7 @@ lvim.plugins = {
   },
   {
     "wetrustinprize/scribe.nvim",
+    requires = "MunifTanjim/nui.nvim",
     config = function()
       require("scribe").setup({})
     end,
@@ -129,4 +132,18 @@ lvim.plugins = {
       require("hop").setup()
     end,
   },
+  {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end
+  },
+  {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup()
+    end
+  }
 }
