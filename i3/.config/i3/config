@@ -35,13 +35,13 @@ exec --no-startup-id volumeicon
 
 # Applications
 bindsym $mod+F2 exec vivaldi-stable
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec thunar
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 
 # Print bindings
 bindsym Print --release exec --no-startup-id i3-scrot -sc
-bindsym Shift+Print exec --no-startup-id i3-scrot -wc
-bindsym Ctrl+Print exec --notstartup-id i3-scrot -dc
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -wc
+bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -dc
 
 # Change focus
 bindsym $mod+h focus left
