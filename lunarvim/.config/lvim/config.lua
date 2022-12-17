@@ -1,9 +1,9 @@
-require "bindings"
-require "plugins"
+require "user.bindings"
+require "user.plugins"
 
-require "formatters"
-require "linters"
-require "lsp"
+require "user.formatters"
+require "user.linters"
+require "user.lsp"
 
 -- GENERAL lvim.log.level = "warn"
 lvim.format_on_save.enabled = true
