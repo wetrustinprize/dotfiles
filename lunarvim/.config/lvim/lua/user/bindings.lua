@@ -1,6 +1,6 @@
 lvim.leader = "space"
 
--- replace SPC + F
+-- replace SPC + f
 lvim.builtin.which_key.mappings["f"] = {
   name = "Find",
   f = { "<cmd>lua require('telescope.builtin').find_files()<cr>", "Files" },
@@ -26,3 +26,7 @@ lvim.builtin.which_key.mappings["n"] = {
   N = { ":ScribeNew<cr>", "New note" },
   f = { ":ScribeFind<cr>", "Find note" },
 }
+
+-- lsp
+-- Replace SPC + l + i
+lvim.builtin.which_key.mappings["l"]["i"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Info" }
