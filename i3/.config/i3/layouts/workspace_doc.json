@@ -1,0 +1,50 @@
+{
+   "border": "pixel",
+   "floating": "auto_off",
+   "layout": "splitv",
+   "marks": [],
+   "percent": 1,
+   "type": "con",
+   "nodes": [
+      {
+         "border": "pixel",
+         "current_border_width": 1,
+         "floating": "auto_off",
+         "geometry": {
+            "height": 915,
+            "width": 1058,
+            "x": 11,
+            "y": 967
+         },
+         "marks": [],
+         "name": "esportes-da-sorte - Jogo Global - Slack",
+         "percent": 0.5,
+         "swallows": [
+            {
+               "class": "^Slack$"
+            }
+         ],
+         "type": "con"
+      },
+      {
+         "border": "pixel",
+         "current_border_width": 1,
+         "floating": "auto_off",
+         "geometry": {
+            "height": 915,
+            "width": 1058,
+            "x": 0,
+            "y": 0
+         },
+         "marks": [],
+         "name": "Inbox - me@wetrustinprize.com - Mozilla Thunderbird",
+         "percent": 0.5,
+         "swallows": [
+            {
+               "class": "^thunderbird$"
+            }
+         ],
+         "type": "con"
+      }
+   ]
+}
