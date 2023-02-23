@@ -146,7 +146,7 @@ bindsym $mod+less move workspace to output left
 assign [class="Vivaldi-stable"] $ws1
 
 ## Docs
-assing [class="Thunderbird"] $ws3
+assign [class="Thunderbird"] $ws3
 
 ## Social
 assign [class="whatsapp-nativefier-*"] $ws4
