@@ -233,7 +233,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Set inner/outer gaps
 gaps inner 12
-gaps outer -2
+gaps outer 0
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
