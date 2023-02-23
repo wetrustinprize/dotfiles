@@ -142,10 +142,19 @@ bindsym $mod+greater move workspace to output right
 bindsym $mod+less move workspace to output left
 
 # Open applications on specific workspaces
+## Web
+assign [class="Vivaldi-stable"] $ws1
+
+## Docs
+assing [class="Thunderbird"] $ws3
+
+## Social
 assign [class="whatsapp-nativefier-*"] $ws4
 assign [class="discord"] $ws4
 assign [class="Telegram"] $ws4
 assign [class="slack"] $ws4
+
+## Music
 assign [class="Spotify"] $ws5
 
 # Open specific applications in floating mode
@@ -186,18 +195,23 @@ mode "resize" {
 bindsym $mod+9 exec --no-startup-id blurlockfancy
 
 # Autostart applications
+## System
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id nitrogen --restore
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xautolock -time 10 -locker blurlockfancy
+exec --no-startup-id protonmail-bridge
 
+## Social
 exec --no-startup-id discord
 exec --no-startup-id telegram-desktop
 exec --no-startup-id whatsapp-nativefier
 exec --no-startup-id spotify
 exec --no-startup-id slack
+exec --no-startup-id thunderbird
 
+## Other
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor "Nordzy-cursors"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
