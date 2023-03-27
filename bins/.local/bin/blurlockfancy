@@ -1,8 +1,23 @@
+#!/bin/sh
+
+# check if a i3lock process is already running
+if pgrep -x i3lock >/dev/null; then
+  exit
+fi
+
+# dpms
+revert() {
+  xset dpms 0 0 0
+}
+trap revert HUP INT TERM
+xset +dpms dpms 5 5 5
+
 # lock the screen
 i3lock \
   -B 2 \
   -k \
   -S 1 \
+  -n \
   --indicator \
   --ring-color=4C566A \
   --inside-color=2E3440 \
@@ -23,7 +38,5 @@ i3lock \
   --pass-media-keys \
   --pass-volume-keys
 
-# sleep 1 adds a small delay to prevent possible race conditions with suspend
-sleep 1
-
-exit 0
+# reset dpms settings
+revert
