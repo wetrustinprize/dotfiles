@@ -1,6 +1,6 @@
 [global]
 monitor = 0
-follow = mouse
+follow = none
 geometry = "300x60-20+48"
 indicate_hidden = yes
 shrink = no
@@ -24,7 +24,7 @@ show_indicators = no
 icon_position = left
 sticky_history = yes
 history_length = 20
-browser = /usr/bin/brave-browser -new-tab
+browser = /usr/bin/vivaldi-stable
 always_run_script = true
 title = Dunst
 class = Dunst
