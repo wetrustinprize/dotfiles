@@ -11,18 +11,22 @@
             "current_border_width": 1,
             "floating": "auto_off",
             "geometry": {
-                "height": 915,
-                "width": 1058,
-                "x": 11,
-                "y": 967
+               "height": 915,
+               "width": 1058,
+               "x": 11,
+               "y": 967
             },
             "marks": [],
-            "name": "Marcelo Garbelotti - Jogo Global - Slack",
-            "percent": 0.628775834658188,
+            "name": "slingo - Jogo Global - Slack",
+            "percent": 0.557042253521127,
             "swallows": [
-                {
-                    "class": "^Slack$"
-                }
+               {
+               "class": "^Slack$",
+               "instance": "^slack$",
+               "machine": "^posheidon\\-linux$",
+               "title": "^slingo\\ \\-\\ Jogo\\ Global\\ \\-\\ Slack$",
+               "window_role": "^browser\\-window$"
+               }
             ],
             "type": "con"
         },
@@ -31,20 +35,25 @@
             "current_border_width": 1,
             "floating": "auto_off",
             "geometry": {
-                "height": 600,
-                "width": 1000,
-                "x": 40,
-                "y": 660
+               "height": 1023,
+               "width": 1080,
+               "x": 0,
+               "y": 0
             },
             "marks": [],
-            "name": "Morgen Calendar",
-            "percent": 0.371224165341812,
+            "name": "me@wetrustinprize.com - Mozilla Thunderbird",
+            "percent": 0.442957746478873,
             "swallows": [
-                {
-                    "class": "^Morgen$"
-                }
+               {
+               "class": "^thunderbird$",
+               "instance": "^Mail$",
+               "machine": "^posheidon\\-linux$",
+               "title": "^me\\@wetrustinprize\\.com\\ \\-\\ Mozilla\\ Thunderbird$",
+               "window_role": "^3pane$"
+               }
             ],
             "type": "con"
         }
     ]
 }
+
