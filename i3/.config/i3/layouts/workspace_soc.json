@@ -21,7 +21,7 @@
             "swallows": [
                 {
                     "class": "^discord$",
-                    "instance": "^discord$"
+                    "title": "^.*Discord(?! Updater).*$"
                 }
             ],
             "type": "con"
@@ -48,8 +48,7 @@
                     "percent": 0.333333333333333,
                     "swallows": [
                         {
-                            "class": "^TelegramDesktop$",
-                            "instance": "^telegram\\-desktop$"
+                            "class": "^TelegramDesktop$"
                         }
                     ],
                     "type": "con"
@@ -69,9 +68,7 @@
                     "percent": 0.333333333333333,
                     "swallows": [
                         {
-                            "class": "^whatsapp\\-nativefier\\-d40211$",
-                            "instance": "^whatsapp\\-nativefier\\-d40211$",
-                            "title": "^WhatsApp$"
+                            "class": "^whatsapp\\-nativefier\\-d40211$"
                         }
                     ],
                     "type": "con"
@@ -90,8 +87,7 @@
                     "percent": 0.333333333333333,
                     "swallows": [
                         {
-                            "class": "^Slack$",
-                            "instance": "^slack$"
+                            "class": "^Slack$"
                         }
                     ],
                     "type": "con"
