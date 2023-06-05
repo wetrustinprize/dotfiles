@@ -4,7 +4,7 @@
 color_enabled="%{F#eceff4}"
 color_disabled="%{F#4c566a}"
 micOnIcon=""
-micOffIcon=""
+micOffIcon="MUTED "
 
 # do not edit below this line
 clear="%{F-}"
@@ -25,9 +25,9 @@ trap "toggle" USR1
 
 while true; do
     if ! amixer get Capture | grep -q off; then
-        echo "$color_disabled$micOnIcon$clear"
+        echo "$color_enabled$micOnIcon$clear"
     else
-        echo "$color_enabled$micOffIcon MUTED$clear"
+        echo "$color_disabled$micOffIcon$clear"
     fi
     sleep 1 &
     sleep_pid=$!
