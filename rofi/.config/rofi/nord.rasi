@@ -8,7 +8,7 @@
 
 configuration {
 
-	font: "Jetbrains Mono R 12";
+	font: "JetBrainsMonoNerdFont 12";
 	width: 30;
 	line-margin: 10;
 	lines: 6;
