@@ -39,45 +39,6 @@
                     "current_border_width": 1,
                     "floating": "auto_off",
                     "geometry": {
-                        "height": 603,
-                        "width": 1058,
-                        "x": 11,
-                        "y": 1279
-                    },
-                    "marks": [],
-                    "percent": 0.333333333333333,
-                    "swallows": [
-                        {
-                            "class": "^TelegramDesktop$"
-                        }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "pixel",
-                    "current_border_width": 1,
-                    "floating": "auto_off",
-                    "geometry": {
-                        "height": 461,
-                        "width": 1058,
-                        "x": 11,
-                        "y": 729
-                    },
-                    "marks": [],
-                    "name": "WhatsApp",
-                    "percent": 0.333333333333333,
-                    "swallows": [
-                        {
-                            "class": "^whatsapp\\-nativefier\\-d40211$"
-                        }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "pixel",
-                    "current_border_width": 1,
-                    "floating": "auto_off",
-                    "geometry": {
                         "height": 915,
                         "width": 1058,
                         "x": 11,
