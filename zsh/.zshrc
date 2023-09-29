@@ -67,9 +67,6 @@ export EDITOR="lvim" # My default code editor
 export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 export ZSH_TMUX_FIXTERM=false
 
-# mono fix
-export FrameworkPathOverride="/lib/mono/4.8-api"
-
 ####################
 #       ALIAS      #
 ####################
