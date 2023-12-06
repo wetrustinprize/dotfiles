@@ -1,1 +1,192 @@
-exec --no-startup-id awk 'FNR==1{print ""}1' ~/.config/i3/conf.d/* > ~/.config/i3/config, restart
+
+set $mod Mod4
+
+######################
+# DEFAULT APPS
+######################
+set $terminal alacritty
+set $browser vivaldi-stable
+set $editor code
+set $file_manager thunar
+
+######################
+# WORKSPACES
+######################
+set $ws1 1:www
+set $ws2 2:dev
+set $ws3 3:doc
+set $ws4 4:soc
+set $ws5 5:mus
+set $ws6 6:vid
+set $ws7 7:sys
+set $ws8 8:otr
+
+######################
+# MONITORS
+######################
+set $monitor1 eDP1
+set $monitor2 HDMI1
+
+######################
+# COLORS
+# https://github.com/sarvesh-codeprism/i3wm-nord/blob/main/i3/config
+######################
+client.focused          #81a1c1 #81a1c1 #ffffff #81a1c1
+client.unfocused        #2e3440 #1f222d #888888 #1f222d
+client.focused_inactive #2e3440 #1f222d #888888 #1f222d
+client.placeholder      #2e3440 #1f222d #888888 #1f222d
+client.urgent           #900000 #900000 #ffffff #900000
+
+client.background #242424
+
+######################
+# FONTS
+######################
+font xft:URWGothic-Book 8
+
+######################
+# BORDERS
+######################
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders none
+
+######################
+# GAP
+######################
+gaps inner 12
+gaps outer 0
+
+smart_borders on
+
+floating_modifier $mod
+
+######################
+# SPAWN BINDINGS
+######################
+bindsym $mod+Return exec $terminal
+bindsym $mod+F1 exec $editor
+bindsym $mod+F2 exec $browser
+bindsym $mod+F3 exec $file_manager
+
+######################
+# WORKSPACE BINDINGS
+######################
+# Kill
+bindsym $mod+Shift+c kill
+bindsym $mod+Shift+x --release exec --no-startup-id xkill
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Back and Forth
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# Fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# Change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Tilling
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s sticky toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Move worskpace
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+######################
+# ROFI BINDINGS
+######################
+bindsym $mod+p exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+P exec --no-startup-id rofi -show run
+
+######################
+# PRINT SCREEN BINDINGS
+######################
+bindsym Print --release exec --no-startup-id i3-scrot -sc
+bindsym Shift+Print --release exec --no-startup-id i3-scrot -wc
+bindsym Ctrl+Print --release exec --no-startup-id i3-scrot -dc
+
+######################
+# i3/SYSTEM BINDINGS
+######################
+bindsym $mod+q exec --no-startup-id awk 'FNR==1{print ""}1' ~/.config/i3/conf.d/* > ~/.config/i3/config, reload
+bindsym $mod+Shift+q exec --no-startup-id awk 'FNR==1{print ""}1' ~/.config/i3/conf.d/* > ~/.config/i3/config, restart
+
+bindsym $mod+9 exec --no-startup-id blurlockfancy
+
+######################
+# SYSTEM
+######################
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id xautolock -time 10 -locker blurlockfancy
+exec --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id volumeicon
+exec --no-startup-id nm-applet
+# exec --no-startup-id picom --experimental-backends
+
+######################
+# WORKSPACE LAYOUTS
+######################
+exec --no-startup-id $HOME/.config/i3/layouts/configure.sh
+
+######################
+# MONITORS
+######################
+workspace $ws3 output $monitor2
+workspace $ws4 output $monitor2
