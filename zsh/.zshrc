@@ -61,7 +61,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 #       ENVS       #
 ####################
 export VISUAL=code # My visual code editor
-export EDITOR="lvim" # My default code editor
+export EDITOR="vim" # My default code editor
 
 # oh-my-zsh tmux plugin
 export ZSH_TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
@@ -77,3 +77,8 @@ alias sudo='nocorrect sudo -E ' # Better SUDO
 ####################
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" ## Yarn bin
 export PATH="$HOME/.local/bin:$PATH" ## Local bin
+
+####################
+#     VI MODE      #
+####################
+bindkey -v
