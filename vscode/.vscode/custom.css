@@ -1,0 +1,7 @@
+div.window-controls-container.primary {
+    display: none !important;
+}
+
+div.global-actions-container.show-control {
+    margin-right: 12px;
+}
